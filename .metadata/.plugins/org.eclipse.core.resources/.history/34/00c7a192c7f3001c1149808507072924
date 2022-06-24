@@ -1,0 +1,12 @@
+package com.patitas.api.app.dominio.entidades;
+
+
+
+public class Accesos {
+	private Integer id;
+	private Boolean gestionCitas;
+	private Boolean gestionAtencion;
+	private Boolean gestionAdmision;
+	private Boolean gestionSeguridad;
+
+}

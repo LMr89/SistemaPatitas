@@ -1,0 +1,5 @@
+package com.patitas.api.app.infraestructura.repositorio;
+
+public class ClienteRepositorio implements JpaRepository<Cliente, Integer> {
+
+}

@@ -1,0 +1,6 @@
+package com.patitas.api.app.infraestructura.repositorio;
+
+public class ClienteRepositorio 
+	extends HibernateRepository {
+
+}

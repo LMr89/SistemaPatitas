@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="/home/mrhazard/Escritorio/ejemplo_clean_spring/clean-architecture-example-spring-rest-api"/>
+			<item value="/home/mrhazard/Escritorio/Idat IV ciclo/Desarrollo de aplicaciones II/Session2/wa-persistencia"/>
+			<item value="/home/mrhazard/Escritorio/Idat IV ciclo/Desarrollo de aplicaciones II/proyectos_Spring/clean-arch-java-demo"/>
+			<item value="/home/mrhazard/Escritorio/Patitas&apos;Sistema/PatitasServiceApp"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+</section>
