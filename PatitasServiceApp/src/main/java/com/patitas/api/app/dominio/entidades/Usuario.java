@@ -10,7 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Usuario {
-	private PerfilUsuario idPerfilUsuario;
+	
+	private Integer id;
 	private String nombre;
 	private String apellidos;
 	private String dni;
@@ -18,5 +19,11 @@ public class Usuario {
 	private String email;
 	private String telefono;
 	private Boolean estado;
+	public Usuario(Integer id) {
+		this.id = id;
+	}
+	
+	
+	
 
 }

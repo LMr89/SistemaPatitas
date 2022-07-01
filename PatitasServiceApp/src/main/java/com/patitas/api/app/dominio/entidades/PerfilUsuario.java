@@ -14,5 +14,6 @@ public class PerfilUsuario {
 	private String nombreUsuario;
 	private String contraseniaUsuario;
 	private Accesos idAcceso;
+	private Usuario idUSuario;
 
 }

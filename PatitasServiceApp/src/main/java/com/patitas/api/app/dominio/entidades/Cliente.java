@@ -14,7 +14,7 @@ public class Cliente {
 	private String nombre;
 	private String apellidos;
 	private String dni;
-	private String Direccion;
+	private String direccion;
 	private String email;
 	private String telefono;
 	private Boolean estado;
