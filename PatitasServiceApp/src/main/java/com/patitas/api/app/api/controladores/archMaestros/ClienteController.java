@@ -3,7 +3,6 @@ package com.patitas.api.app.api.controladores.archMaestros;
 import java.util.List;
 import java.util.Optional;
 
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.patitas.api.app.dominio.entidades.Cliente;
-import com.patitas.api.app.dominio.modelo.respuesta.archMaestros.ClienteRespuesta;
 import com.patitas.api.app.infraestructura.local.adaptadores.archMaestros.ClienteAdaptador;
 
 @RestController
@@ -37,7 +35,7 @@ public class ClienteController  {
 	@ResponseBody
 	public ResponseEntity<String> crearNuevoCLiente(@RequestBody Cliente cli) {
 		try {
-			Cliente nuevoCliente = clienteAdap.crearNuevoCLiente(cli);
+			clienteAdap.crearNuevoCLiente(cli);
 			
 			return ResponseEntity.ok("Cliente registrado con exito");
 			
@@ -69,7 +67,7 @@ public class ClienteController  {
 	@ResponseBody
 	public ResponseEntity<String> actualizarCliente(@RequestBody Cliente cli) {
 		try {
-			Cliente clienteActua = clienteAdap.actualizarCliente(cli);
+			 clienteAdap.actualizarCliente(cli);
 			return ResponseEntity.ok("Cliente actualizado");
 			
 		} catch (Exception e) {

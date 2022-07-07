@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.patitas.api.app.aplicacion.intefaces.autenticacion.ILogin;
-import com.patitas.api.app.dominio.entidades.Accesos;
 import com.patitas.api.app.dominio.modelo.peticion.autenticacion.LoginPeticion;
 import com.patitas.api.app.dominio.modelo.respuesta.autenticacion.LoginRespuesta;
 import com.patitas.api.app.dominio.objetosValores.LoginConstantes;
-import com.patitas.api.app.infraestructura.local.repositorio.entidades.AccesosJpa;
 import com.patitas.api.app.infraestructura.local.repositorio.entidades.PerfilUsuarioJpa;
 import com.patitas.api.app.infraestructura.local.repositorio.repositorios.PerfilUsuarioRep;
 import com.patitas.api.app.infraestructura.mapeadores.autenticacion.AccesosMaper;

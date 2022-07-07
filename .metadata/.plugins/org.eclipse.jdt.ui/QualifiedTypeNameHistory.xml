@@ -1,20 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="lombok.Setter"/>
-    <fullyQualifiedTypeName name="lombok.Getter"/>
-    <fullyQualifiedTypeName name="lombok.NoArgsConstructor"/>
-    <fullyQualifiedTypeName name="lombok.AllArgsConstructor"/>
-    <fullyQualifiedTypeName name="com.patitas.api.app.dominio.entidades.Accesos"/>
-    <fullyQualifiedTypeName name="com.patitas.api.app.dominio.entidades.PerfilUsuario"/>
-    <fullyQualifiedTypeName name="com.patitas.api.app.dominio.entidades.Usuario"/>
-    <fullyQualifiedTypeName name="com.patitas.api.app.dominio.entidades.Mascota"/>
-    <fullyQualifiedTypeName name="com.patitas.api.app.dominio.entidades.Veterinario"/>
-    <fullyQualifiedTypeName name="com.patitas.api.app.dominio.entidades.HistoriaClinica"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
-    <fullyQualifiedTypeName name="java.awt.List"/>
-    <fullyQualifiedTypeName name="com.patitas.api.app.dominio.entidades.Cliente"/>
-    <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="lombok.Data"/>
-    <fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration"/>
+    <fullyQualifiedTypeName name="okhttp3.OkHttpClient"/>
+    <fullyQualifiedTypeName name="okhttp3.MediaType"/>
+    <fullyQualifiedTypeName name="okhttp3.Request"/>
+    <fullyQualifiedTypeName name="okhttp3.RequestBody"/>
+    <fullyQualifiedTypeName name="okhttp3.Response"/>
 </qualifiedTypeNameHistroy>

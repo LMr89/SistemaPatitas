@@ -22,6 +22,7 @@ public class Usuario {
 	public Usuario(Integer id) {
 		this.id = id;
 	}
+
 	
 	
 	

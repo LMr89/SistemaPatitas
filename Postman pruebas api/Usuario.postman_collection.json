@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "7220b459-0711-4ab0-9d35-6379e3b6383a",
+		"name": "Usuario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18714150"
+	},
+	"item": [
+		{
+			"name": "LIstar Usuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/api/usuario/listar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"api",
+						"usuario",
+						"listar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "crearUsuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": 0,\n        \"nombre\": \"alejando context \",\n        \"apellidos\": \"asdddd\",\n        \"dni\": \"96325874\",\n        \"email\": \"saddddd@\",\n        \"telefono\": \"636363636\",\n        \"estado\": true,\n        \"direccion\": \"asddddd\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8070/api/usuario/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"api",
+						"usuario",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "actualizarUsuario",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"id\": 7,\n        \"nombre\": \"alejando context \",\n        \"apellidos\": \"asdddd\",\n        \"dni\": \"96325874\",\n        \"email\": \"saddddd@\",\n        \"telefono\": \"636363636\",\n        \"estado\": true,\n        \"direccion\": \"Los milenios\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8070/api/usuario/actualizar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"api",
+						"usuario",
+						"actualizar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EliminarUsuario",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8070/api/usuario/eliminar/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"api",
+						"usuario",
+						"eliminar",
+						"7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

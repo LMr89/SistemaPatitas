@@ -1,7 +1,0 @@
-package com.patitas.api.app.aplicacion.service;
-
-import java.util.List;
-
-public interface  ClienteService {
-	List<>
-}

@@ -47,7 +47,6 @@ public class PerfilController {
 		} 
 	}
 	
-	@SuppressWarnings("unchecked")
 	@GetMapping("/buscar/{id}")
 	public ResponseEntity<PerfilUsuario> encontrarCLientePorId(@PathVariable Integer id) {
 		try {

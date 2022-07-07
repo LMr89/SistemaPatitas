@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "6aff8d90-14d1-4b93-ae78-f30c88c72719",
+		"name": "Login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18714150"
+	},
+	"item": [
+		{
+			"name": "iniciar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nomUsuario\":\"admin\",\n    \"contrasenia\":\"admin123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8070/api/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8070",
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

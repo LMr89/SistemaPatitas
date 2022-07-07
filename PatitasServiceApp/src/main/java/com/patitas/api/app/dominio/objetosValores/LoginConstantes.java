@@ -1,6 +1,5 @@
 package com.patitas.api.app.dominio.objetosValores;
 
-import lombok.Data;
 
 
 public enum LoginConstantes {
