@@ -417,3 +417,23 @@ BEGIN
 	FROM perfil_usuario
 	WHERE id_usuario = _idalumno;
 	END%%
+DELIMITER
+
+
+
+DELIMITER %%
+CREATE  PROCEDURE sp_registrarCita(IN idCliente INT, IN idMascota INT, IN idVeterinario INT, IN idRecep INT,
+		IN fecha_registro DATETIME, IN fecha_atencion DATETIME, in estado tinyint(1))
+BEGIN	
+	set  @idCita = (select max(id_cita) + 1  from cita);
+	insert into cita (id_cita, idCliente, idMascota, id_veterinario, idRecepcionista, fecha_registro, fecha_atencion, pendiente)
+	values(@idCita,idCliente, idMascota,  idVeterinario,idRecep, fecha_registro, fecha_atencion, estado );
+	END%%
+DELIMITER
+
+
+
+
+
+
+

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.patitas.api.app.dominio.entidades.Cliente;
+import com.patitas.api.app.dominio.entidades.archMaestro.Cliente;
 import com.patitas.api.app.infraestructura.local.adaptadores.archMaestros.ClienteAdaptador;
 
 @RestController

@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.patitas.api.app.aplicacion.intefaces.archMaestros.IPerfilUsuario;
-import com.patitas.api.app.dominio.entidades.PerfilUsuario;
-import com.patitas.api.app.dominio.entidades.Usuario;
+import com.patitas.api.app.dominio.entidades.archMaestro.PerfilUsuario;
+import com.patitas.api.app.dominio.entidades.archMaestro.Usuario;
 import com.patitas.api.app.dominio.modelo.peticion.archMaestros.PerfilUsuarioPeticion;
-import com.patitas.api.app.infraestructura.local.repositorio.entidades.PerfilUsuarioJpa;
-import com.patitas.api.app.infraestructura.local.repositorio.repositorios.PerfilUsuarioRep;
+import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.PerfilUsuarioJpa;
+import com.patitas.api.app.infraestructura.local.repositorio.repositorios.archMaestro.PerfilUsuarioRep;
 import com.patitas.api.app.infraestructura.mapeadores.archMaestros.PerfilUsuarioMapper;
 import com.patitas.api.app.infraestructura.mapeadores.archMaestros.UsuarioMapper;
 
