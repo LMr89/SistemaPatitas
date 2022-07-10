@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script th:src="@{/js/jsweb/Cita/frmMantCita.js}" type="text/javascript"></script>
+
+<body>
+	<nav th:replace="layout::menu"></nav>
+	<div class="card">
+		<div class="card-header bg-dark text-white">Citas</div>
+		<div class="card-body">
+
+			<button type="button" class="btn btn-primary" id="btngenerarcita">Generar
+				cita</button>
+			<hr />
+			<div id="mensaje"></div>
+			<table class="table" id="tblcita">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">FechaRegistro</th>
+						<th scope="col">FechaAtencion</th>
+						<th scope="col">Pendiente</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="cita :${listcitas}">
+						<th th:text="${cita.id}"></th>
+						<td th:text="${cita.fecharegistro}"></td>
+						<td th:text="${cita.fechaatencion}"></td>
+						<td th:text="${cita.pendiente}"></td>
+
+						<td>
+							<button type="button" class="btn btn-primary btnactualizarcita"
+								th:data-codcita="${cita.id}"
+								th:data-fecharegistro="${cita.fecharegistro}"
+								th:data-fechaatencion="${cita.fechaatencion}"
+								th:data-pendiente="${cita.pendiente}">Actualizar</button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger btneliminarcita"
+								th:data-codcita="${cita.id}"
+								th:data-fecharegistro="${cita.fecharegistro}"
+								th:data-fechaatencion="${cita.fechaatencion}"
+								th:data-pendiente="${cita.pendiente}">Eliminar</button>
+
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- Modal Agregar cita -->
+	<div class="modal fade" id="modalcita" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Registrar
+						Cita</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+
+					<div class="mb-3">
+						<label for="txtfecharegistro" class="form-label">Fecha de Registro</label> <input type="date" class="form-control" id="txtfecharegistro">
+						<span id="errorfecharegistro" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3">
+						<label for="txtfechaatencion" class="form-label">Fecha de Atencion</label> <input type="date" class="form-control" id="txtfechaatencion">
+						<span id="errorfechaatencion" class="text-danger"></span>
+					</div>
+					
+					<div class="mb-3">
+						<label for="txtpendiente" class="form-label">Pendiente </label> <input
+							type="text" class="form-control" id="txtpendiente"> <span
+							id="errorpendiente" class="text-danger"></span>
+					</div>
+
+					<input type="hidden" id="hddidcita">
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary"
+						id="btnregistrarcita">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Modal Eliminar Cita -->
+	<div class="modal fade" id="modaleliminarcita" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Eliminar
+						Cita</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<label id="mensajeeliminar"></label> <input type="hidden"
+						id="hddidcitaeliminar">
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-danger"
+						id="btneliminarcita">Eliminar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

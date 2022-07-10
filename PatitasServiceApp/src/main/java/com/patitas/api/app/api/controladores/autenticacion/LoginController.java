@@ -2,6 +2,7 @@ package com.patitas.api.app.api.controladores.autenticacion;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,7 @@ public class LoginController {
 	@Autowired
 	private LoginAdapter logAdapter;
 	
+	@CrossOrigin("http://localhost:8040")
 	@PostMapping("/auth")
 	@ResponseBody
 	public ResponseEntity<LoginRespuesta> iniciarSesion(@RequestBody LoginPeticion pet) {

@@ -1,0 +1,4 @@
+@charset "UTF-8";
+body{background-image: url("/img/imagen-fondo.png");
+  background-repeat:no-repeat; background-size: 100%;}
+#principal{margin-top: 200px;}

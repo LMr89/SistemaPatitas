@@ -1,5 +1,6 @@
 package com.patitas.api.app.dominio.entidades;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
