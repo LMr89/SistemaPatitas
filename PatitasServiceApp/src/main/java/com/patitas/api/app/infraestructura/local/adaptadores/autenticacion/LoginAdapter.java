@@ -9,8 +9,8 @@ import com.patitas.api.app.aplicacion.intefaces.autenticacion.ILogin;
 import com.patitas.api.app.dominio.modelo.peticion.autenticacion.LoginPeticion;
 import com.patitas.api.app.dominio.modelo.respuesta.autenticacion.LoginRespuesta;
 import com.patitas.api.app.dominio.objetosValores.LoginConstantes;
-import com.patitas.api.app.infraestructura.local.repositorio.entidades.PerfilUsuarioJpa;
-import com.patitas.api.app.infraestructura.local.repositorio.repositorios.PerfilUsuarioRep;
+import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.PerfilUsuarioJpa;
+import com.patitas.api.app.infraestructura.local.repositorio.repositorios.archMaestro.PerfilUsuarioRep;
 import com.patitas.api.app.infraestructura.mapeadores.autenticacion.AccesosMaper;
 
 @Service

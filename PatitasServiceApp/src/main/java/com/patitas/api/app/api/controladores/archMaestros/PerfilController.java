@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.patitas.api.app.dominio.entidades.PerfilUsuario;
-import com.patitas.api.app.dominio.entidades.Usuario;
+import com.patitas.api.app.dominio.entidades.archMaestro.PerfilUsuario;
+import com.patitas.api.app.dominio.entidades.archMaestro.Usuario;
 import com.patitas.api.app.dominio.modelo.peticion.archMaestros.PerfilUsuarioPeticion;
 import com.patitas.api.app.infraestructura.local.adaptadores.archMaestros.PerfilUsuarioAdaptador;
 

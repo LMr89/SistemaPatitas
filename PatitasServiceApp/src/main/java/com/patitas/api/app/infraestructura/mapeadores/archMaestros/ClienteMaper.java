@@ -1,7 +1,7 @@
 package com.patitas.api.app.infraestructura.mapeadores.archMaestros;
 
-import com.patitas.api.app.dominio.entidades.Cliente;
-import com.patitas.api.app.infraestructura.local.repositorio.entidades.ClienteJpa;
+import com.patitas.api.app.dominio.entidades.archMaestro.Cliente;
+import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.ClienteJpa;
 
 public class ClienteMaper {
 	public static  Cliente mapDeEntidadJpaADominio(ClienteJpa cliEnti) {

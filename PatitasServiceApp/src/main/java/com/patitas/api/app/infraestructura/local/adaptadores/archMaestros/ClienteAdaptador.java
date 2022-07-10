@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.patitas.api.app.aplicacion.intefaces.archMaestros.ICliente;
-import com.patitas.api.app.dominio.entidades.Cliente;
-import com.patitas.api.app.infraestructura.local.repositorio.entidades.ClienteJpa;
-import com.patitas.api.app.infraestructura.local.repositorio.repositorios.ClienteRep;
+import com.patitas.api.app.dominio.entidades.archMaestro.Cliente;
+import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.ClienteJpa;
+import com.patitas.api.app.infraestructura.local.repositorio.repositorios.archMaestro.ClienteRep;
 import com.patitas.api.app.infraestructura.mapeadores.archMaestros.ClienteMaper;
 
 @Service

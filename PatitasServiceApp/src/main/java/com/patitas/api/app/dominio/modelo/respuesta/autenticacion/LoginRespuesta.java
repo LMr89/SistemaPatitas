@@ -1,6 +1,6 @@
 package com.patitas.api.app.dominio.modelo.respuesta.autenticacion;
 
-import com.patitas.api.app.dominio.entidades.Accesos;
+import com.patitas.api.app.dominio.entidades.archMaestro.Accesos;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

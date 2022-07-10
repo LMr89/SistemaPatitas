@@ -1,7 +1,7 @@
 package com.patitas.api.app.infraestructura.mapeadores.archMaestros;
 
-import com.patitas.api.app.dominio.entidades.Usuario;
-import com.patitas.api.app.infraestructura.local.repositorio.entidades.UsuarioJpa;
+import com.patitas.api.app.dominio.entidades.archMaestro.Usuario;
+import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.UsuarioJpa;
 
 public class UsuarioMapper {
 	public static  Usuario mapDeEntidadJpaADominio(UsuarioJpa cliEnti) {
