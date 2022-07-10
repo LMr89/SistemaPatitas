@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="okhttp3.OkHttpClient"/>
-    <fullyQualifiedTypeName name="okhttp3.MediaType"/>
-    <fullyQualifiedTypeName name="okhttp3.Request"/>
-    <fullyQualifiedTypeName name="okhttp3.RequestBody"/>
-    <fullyQualifiedTypeName name="okhttp3.Response"/>
-</qualifiedTypeNameHistroy>
