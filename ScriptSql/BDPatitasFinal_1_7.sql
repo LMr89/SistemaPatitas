@@ -431,6 +431,16 @@ BEGIN
 	END%%
 DELIMITER
 
+DELIMITER %%
+CREATE  PROCEDURE sp_registrarMascota(IN idCliente INT, IN nombre VARCHAR(60), IN id_raza INT, IN color VARCHAR(60),
+		in id_especie INT, in estado tinyint(1))
+BEGIN	
+	set  @idMascota = (select max(idMascota) + 1  from mascota);
+	insert into mascota (idMascota, idCliente, nombre, id_raza, color, id_especie, estado)
+	values(@idMascota,idCliente, nombre,  id_raza,color, id_especie, estado );
+	END%%
+DELIMITER
+
 
 
 

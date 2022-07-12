@@ -13,9 +13,9 @@ public class Mascota {
 	private Integer id;
 	private Cliente idCliente;
 	private String nombre;
-	private String raza;
+	private Integer raza;
 	private String color;
-	private String especie;
+	private Integer especie;
 	private Boolean estado;
 	
 

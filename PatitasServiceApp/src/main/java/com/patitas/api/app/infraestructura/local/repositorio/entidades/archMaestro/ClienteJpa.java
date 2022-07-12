@@ -61,6 +61,12 @@ public class ClienteJpa implements Serializable {
 		this.telefono = telefono;
 		this.estado = estado;
 	}
+	
+
+	public ClienteJpa(Integer idcliente) {
+		this.idcliente = idcliente;
+	}
+
 
 	/*
 	@JsonManagedReference(value = "mascota-cliente")
@@ -70,7 +76,7 @@ public class ClienteJpa implements Serializable {
 
 
 	@JsonManagedReference(value = "mascota-cliente")
-	@OneToMany(mappedBy = "idCli",  cascade = CascadeType.ALL )
+	@OneToMany(mappedBy = "idCliente",  cascade = CascadeType.ALL )
 	public List<MascotaJpa> lstMascotas;
 
 }
