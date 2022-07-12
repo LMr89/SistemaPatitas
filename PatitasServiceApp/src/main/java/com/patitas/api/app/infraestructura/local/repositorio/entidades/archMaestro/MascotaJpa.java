@@ -22,7 +22,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Mascota")
+@Table(name = "mascota")
 public class MascotaJpa {
 	
 	@Id
@@ -33,17 +33,25 @@ public class MascotaJpa {
 	@JsonBackReference(value = "mascota-cliente")
 	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
 	@JoinColumn(name = "idcliente")
-	private ClienteJpa idCli;
+	private ClienteJpa idCliente;
 	
 	@Column(name = "nombre")
 	private String nombre;
 	
-	@Column(name = "raza")
-	private String raza;
+	@JsonBackReference(value = "mascota-raza")
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_raza")
+	private RazaJpa raza;
+	
+	
 	@Column(name = "color")
 	private String color;
-	@Column(name = "especie")
-	private String especie;
+	
+	@JsonBackReference(value = "mascota-especie")
+	@ManyToOne(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_especie")
+	private EspecieJpa especie;
+	
 	@Column(name = "estado")
 	private Boolean estado;
 	
@@ -55,10 +63,10 @@ public class MascotaJpa {
 	public MascotaJpa() {
 	}
 	
-	public MascotaJpa(Integer id, ClienteJpa idCli, String nombre, String raza, String color, String especie,
+	public MascotaJpa(Integer id, ClienteJpa idCli, String nombre, RazaJpa raza, String color, EspecieJpa especie,
 			Boolean estado) {
 		this.id = id;
-		this.idCli = idCli;
+		this.idCliente = idCli;
 		this.nombre = nombre;
 		this.raza = raza;
 		this.color = color;

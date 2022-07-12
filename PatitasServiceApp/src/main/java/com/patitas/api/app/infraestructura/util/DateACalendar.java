@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class DateACalendar {
+	@SuppressWarnings("unused")
 	private static  final SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
 	
 	public static Calendar convertir(Date objDate) {

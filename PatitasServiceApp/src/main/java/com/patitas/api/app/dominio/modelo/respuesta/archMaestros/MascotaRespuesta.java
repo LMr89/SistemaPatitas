@@ -11,4 +11,16 @@ public class MascotaRespuesta {
 	
 	private Integer idMascota;
 	private String Nombre;
+	private String raza;
+	private String color;
+	private String especie;
+	
+
+
+	public MascotaRespuesta(Integer idMascota, String nombre) {
+		this.idMascota = idMascota;
+		Nombre = nombre;
+	}
+	
+	
 }
