@@ -27,7 +27,6 @@ public class EspecieJpa {
 	private String nombre;
 
 	public EspecieJpa(Integer idEspecie) {
-		super();
 		this.idEspecie = idEspecie;
 	}
 	

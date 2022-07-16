@@ -1,7 +1,6 @@
 package com.patitas.api.app.api.controladores.archMaestros;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -49,11 +48,11 @@ public class MascotaController {
 	}
 	
 	@GetMapping("/buscar/{id}")
-	public ResponseEntity<MascotaRespuesta> encontrarMascotaPorIdCliente(@PathVariable Integer id) {
+	public ResponseEntity<List<MascotaRespuesta>> encontrarMascotaPorIdCliente(@PathVariable Integer id) {
 		try {
-			Optional<MascotaRespuesta>mascotaEncontrada =  objMascotaAdap.encontrarMascotaPorIdCliente(id);
-			if (mascotaEncontrada.isPresent()) {
-				return ResponseEntity.ok(mascotaEncontrada.get());
+			List<MascotaRespuesta>mascotaEncontrada =  objMascotaAdap.encontrarMascotaPorIdCliente(id);
+			if (mascotaEncontrada.size() > 0) {
+				return ResponseEntity.ok(mascotaEncontrada);
 			}
 		} catch (Exception e) {
 			return ResponseEntity.badRequest()

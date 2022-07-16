@@ -26,5 +26,7 @@ public class Cita {
 	private Calendar fechaAtencion;
 	private Boolean pendiente;
 	
+	
+	
 
 }

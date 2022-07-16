@@ -1,7 +1,6 @@
 package com.patitas.api.app.infraestructura.local.adaptadores.archMaestros;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import com.patitas.api.app.aplicacion.intefaces.archMaestros.IMascota;
 import com.patitas.api.app.dominio.entidades.archMaestro.Mascota;
 import com.patitas.api.app.dominio.modelo.peticion.archMaestros.MascotaPeticion;
 import com.patitas.api.app.dominio.modelo.respuesta.archMaestros.MascotaRespuesta;
-import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.ClienteJpa;
 import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.MascotaJpa;
 import com.patitas.api.app.infraestructura.local.repositorio.repositorios.archMaestro.ClienteRep;
 import com.patitas.api.app.infraestructura.local.repositorio.repositorios.archMaestro.EspecieRep;
@@ -49,12 +47,16 @@ public class MascotaAdaptador implements IMascota{
 		objMasctaRep.registrarMascota(masco.getIdCliente(), masco.getNombre(), 
 				masco.getIdRaza(),masco.getColor(),masco.getIdEspecie(),true);
 		
-		return encontrarMascotaPorIdCliente(masco.getIdCliente()).get();
+		return new MascotaRespuesta(masco.getNombre());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Optional<MascotaRespuesta> encontrarMascotaPorIdCliente(Integer id) {
-		return Optional.of(MascotaMapper.mapDeEntidadJpaAMascotaRespuesta(objMasctaRep.findByIdCliente(new ClienteJpa(id)).get()));
+	public List<MascotaRespuesta> encontrarMascotaPorIdCliente(Integer id) {
+		return  objMasctaRep.findAll().stream()
+				.filter(m -> m.getIdCliente().getIdcliente() == id)
+				.map(MascotaMapper::mapDeEntidadJpaAMascotaRespuesta)
+				.collect(Collectors.toList());
 	}
 
 	@Override

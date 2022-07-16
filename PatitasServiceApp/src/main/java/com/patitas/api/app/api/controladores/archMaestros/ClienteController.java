@@ -46,6 +46,22 @@ public class ClienteController  {
 		} 
 	}
 	
+	@GetMapping("/buscar-dni/{dni}")
+	public ResponseEntity<Cliente> encontrarCLientePorDni(@PathVariable String dni) {
+		try {
+			Optional<Cliente>cliEncontrado =  clienteAdap.encontrarCLientePorDni(dni);
+			if (cliEncontrado.isPresent()) {
+				return ResponseEntity.ok(cliEncontrado.get());
+			}
+		} catch (Exception e) {
+			return ResponseEntity.badRequest()
+					.header("Error", e.getMessage())
+					.body(new Cliente());
+		}
+		return null;
+		
+	}
+	
 	@GetMapping("/buscar/{id}")
 	public ResponseEntity<Cliente> encontrarCLientePorId(@PathVariable Integer id) {
 		try {

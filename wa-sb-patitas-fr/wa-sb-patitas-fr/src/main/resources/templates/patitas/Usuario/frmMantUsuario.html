@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="../layout::head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+
+<script th:src="@{/js/jsweb/Usuario/frmMantUsuario.js}"
+	type="text/javascript"></script>
+<body>
+<nav th:replace="../layout::menu"></nav>
+
+	<div class="card">
+		<div class="card-header bg-dark text-white">Mantenimiento de
+			usuarios</div>
+		<div class="card-body">
+
+			<button type="button" class="btn btn-primary" id="btnagregarusuario">Registrar
+				usuario</button>
+			<hr />
+			<div id="mensaje"></div>
+			<table class="table" id="tblusuario">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Apellidos</th>
+						<th scope="col">DNI</th>
+						<th scope="col">Direccion</th>
+						<th scope="col">Correo</th>
+						<th scope="col">Telefono</th>
+						<th scope="col">Estado</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="usuario :${listusuarios}">
+						<th th:text="${usuario.id}"></th>
+						<td th:text="${usuario.nombre}"></td>
+						<td th:text="${usuario.apellidos}"></td>
+						<td th:text="${usuario.dni}"></td>
+						<td th:text="${usuario.direccion}"></td>
+						<td th:text="${usuario.correo}"></td>
+						<td th:text="${usuario.telefono}"></td>
+						<td th:text="${usuario.estado}"></td>
+						<td>
+							<button type="button" class="btn btn-primary btnactualizarusuario"
+								th:data-codusuario="${usuario.id}"
+								th:data-nombre="${usuario.nombre}"
+								th:data-apellidos="${usuario.apellidos}"
+								th:data-dni="${usuario.dni}"
+								th:data-direccion="${usuario.direccion}"
+								th:data-correo="${usuario.correo}"
+								th:data-telefono="${usuario.telefono}"
+								th:data-estado="${usuario.estado}">Actualizar</button>
+						</td>
+						<td>
+						<button type="button" class="btn btn-danger btneliminarusuario"
+								th:data-codusuario="${usuario.id}"
+								th:data-nombre="${usuario.nombre}"
+								th:data-apellidos="${usuario.apellidos}"
+								th:data-dni="${usuario.dni}"
+								th:data-direccion="${usuario.direccion}"
+								th:data-correo="${usuario.correo}"
+								th:data-telefono="${usuario.telefono}"
+								th:data-estado="${usuario.estado}">Eliminar</button>
+						
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- Modal Agregar Usuario -->
+	<div class="modal fade" id="modalusuario" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Registrar Usuario</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+
+					<div class="mb-3">
+						<label for="txtnombre" class="form-label">Nombre del
+							Usuario</label> <input type="text" class="form-control" id="txtnombre">
+							<span id="errornombre" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3">
+						<label for="txtapellidos" class="form-label">Apellidos del Usuario
+						</label> <input type="text" class="form-control" id="txtapellidos">
+							<span id="errorapellidos" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txtdni" class="form-label">DNI
+						</label> <input type="number" class="form-control" id="txtdni">
+							<span id="errordni" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txtdireccion" class="form-label">Direccion
+						</label> <input type="text" class="form-control" id="txtdireccion">
+							<span id="errordireccion" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txtcorreo" class="form-label">Correo
+						</label> <input type="text" class="form-control" id="txtcorreo">
+							<span id="errorcorreo" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txttelefono" class="form-label">Telefono
+						</label> <input type="number" class="form-control" id="txttelefono">
+							<span id="errortelefono" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txtestado" class="form-label">Estado
+						</label> <input type="text" class="form-control" id="txtestado">
+							<span id="errorestado" class="text-danger"></span>
+					</div>
+					
+					<input type="hidden" id="hddidusuario">
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary" id="btnregistrarusuario">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+		<!-- Modal Eliminar Usuario -->
+	<div class="modal fade" id="modaleliminarusuario" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Eliminar Usuario</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<label id="mensajeeliminar"></label>
+					<input type="hidden" id="hddidusuarioeliminar">
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-danger" id="btneliminarusuario">Eliminar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>

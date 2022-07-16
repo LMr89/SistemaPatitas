@@ -21,6 +21,12 @@ public class MascotaRespuesta {
 		this.idMascota = idMascota;
 		Nombre = nombre;
 	}
+
+
+
+	public MascotaRespuesta(String nombre2) {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 }

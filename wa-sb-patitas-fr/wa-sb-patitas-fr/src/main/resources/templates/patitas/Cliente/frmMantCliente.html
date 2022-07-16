@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+
+<script th:src="@{/js/jsweb/Cliente/frmMantCliente.js}"
+	type="text/javascript"></script>
+<body>
+	<nav th:replace="layout::menu"></nav>
+
+	<div class="card">
+		<div class="card-header bg-dark text-white">Mantenimiento de
+			clientes</div>
+		<div class="card-body">
+
+			<button type="button" class="btn btn-primary" id="btnagregarcliente">Registrar
+				Cliente</button>
+			<hr />
+			<div id="mensaje"></div>
+			<table class="table" id="tblcliente">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Apellidos</th>
+						<th scope="col">DNI</th>
+						<th scope="col">Direccion</th>
+						<th scope="col">Correo</th>
+						<th scope="col">Telefono</th>
+						<th scope="col">Estado</th>
+
+					</tr>
+				</thead>
+				<tbody>
+
+					<tr th:each="cliente :${listclientes}">
+						<th th:text="${cliente.idcliente}"></th>
+						<td th:text="${cliente.nombre}"></td>
+						<td th:text="${cliente.apellidos}"></td>
+						<td th:text="${cliente.dni}"></td>
+						<td th:text="${cliente.direccion}"></td>
+						<td th:text="${cliente.correo}"></td>
+						<td th:text="${cliente.telefono}"></td>
+						<td th:text="${cliente.estado}"></td>
+						<td>
+							<button type="button" class="btn btn-primary btnactualizarcliente"
+								th:data-codcliente="${cliente.idcliente}"
+								th:data-nombre="${cliente.nombre}"
+								th:data-apellidos="${cliente.apellidos}"
+								th:data-dni="${cliente.dni}"
+								th:data-direccion="${cliente.direccion}"
+								th:data-correo="${cliente.correo}"
+								th:data-telefono="${cliente.telefono}"
+								th:data-estado="${cliente.estado}">Actualizar</button>
+						</td>
+						<td>
+						<button type="button" class="btn btn-danger btneliminarcliente"
+								th:data-codcliente="${cliente.idcliente}"
+								th:data-nombre="${cliente.nombre}"
+								th:data-apellidos="${cliente.apellidos}"
+								th:data-dni="${cliente.dni}"
+								th:data-direccion="${cliente.direccion}"
+								th:data-correo="${cliente.correo}"
+								th:data-telefono="${cliente.telefono}"
+								th:data-estado="${cliente.estado}">Eliminar</button>
+						
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- Modal Agregar Cliente -->
+	<div class="modal fade" id="modalcliente" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Registrar Cliente</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+
+					<div class="mb-3">
+						<label for="txtnombre" class="form-label">Nombre del
+							Cliente</label> <input type="text" class="form-control" id="txtnombre">
+							<span id="errornombre" class="text-danger"></span>
+					</div>
+
+					<div class="mb-3">
+						<label for="txtapellidos" class="form-label">Apellidos del Cliente
+						</label> <input type="text" class="form-control" id="txtapellidos">
+							<span id="errorapellidos" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txtdni" class="form-label">DNI
+						</label> <input type="number" class="form-control" id="txtdni">
+							<span id="errordni" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txtdireccion" class="form-label">Direccion
+						</label> <input type="text" class="form-control" id="txtdireccion">
+							<span id="errordireccion" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txtcorreo" class="form-label">Correo
+						</label> <input type="text" class="form-control" id="txtcorreo">
+							<span id="errorcorreo" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txttelefono" class="form-label">Telefono
+						</label> <input type="number" class="form-control" id="txttelefono">
+							<span id="errortelefono" class="text-danger"></span>
+					</div>
+					
+					<div class="mb-3">
+					<label for="txtestado" class="form-label">Estado </label>
+						<select id="txtestado" class="form-select" aria-label="Default select example">
+							<option value="true">Activo</option>
+							<option value="false">Inactivo</option>
+						</select> <span id="errorestado" class="text-danger"></span>
+					</div>
+					
+					<input type="hidden" id="hddidcliente">
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary" id="btnregistrarcliente">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+		<!-- Modal Eliminar Cliente -->
+	<div class="modal fade" id="modaleliminarcliente" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Eliminar Cliente</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<label id="mensajeeliminar"></label>
+					<input type="hidden" id="hddidclienteeliminar">
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-danger" id="btneliminarcliente">Eliminar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

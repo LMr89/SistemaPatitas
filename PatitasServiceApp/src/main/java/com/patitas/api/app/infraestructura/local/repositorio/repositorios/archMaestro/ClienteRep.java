@@ -1,5 +1,7 @@
 package com.patitas.api.app.infraestructura.local.repositorio.repositorios.archMaestro;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,5 +24,7 @@ public interface ClienteRep extends JpaRepository<ClienteJpa, Integer> {
 			@Param("correo") String correo,
 			@Param("telefono") String telefono,
 			@Param("estado") Boolean estado);
+	
+	Optional<ClienteJpa> findByDni(String dni); 
 
 }

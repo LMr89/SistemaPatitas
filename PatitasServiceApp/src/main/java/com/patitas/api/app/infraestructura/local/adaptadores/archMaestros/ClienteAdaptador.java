@@ -41,9 +41,18 @@ public class ClienteAdaptador implements ICliente{
 	}
 
 	@Override
-	public Optional<Cliente> encontrarCLientePorId(Integer id) {
+	public Optional<Cliente> encontrarCLientePorDni(String dni) {
 		/*La clase JPA encontrada por el id se convierte en clase 
 		 * del dominio y esta se envuelve en una clase OPTIONAL y se retorna*/
+		return Optional.of(ClienteMaper.mapDeEntidadJpaADominio(
+				clienteRep.findByDni(dni).get()));
+	}
+	
+	
+
+	@Override
+	public Optional<Cliente> encontrarCLientePorId(Integer id) {
+		// TODO Auto-generated method stub
 		return Optional.of(ClienteMaper.mapDeEntidadJpaADominio(
 				clienteRep.findById(id).get()));
 	}

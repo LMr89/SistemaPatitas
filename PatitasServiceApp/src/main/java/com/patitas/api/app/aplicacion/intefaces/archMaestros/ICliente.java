@@ -8,6 +8,7 @@ import com.patitas.api.app.dominio.entidades.archMaestro.Cliente;
 public interface  ICliente {
 	List<Cliente> listarClientes();
 	Cliente crearNuevoCLiente(Cliente cli);
+	Optional<Cliente> encontrarCLientePorDni(String dni);
 	Optional<Cliente> encontrarCLientePorId(Integer id);
 	Cliente actualizarCliente(Cliente cli);
 	void eliminarCLiente(Integer id);
