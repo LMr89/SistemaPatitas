@@ -1,6 +1,8 @@
 package com.patitas.api.app.infraestructura.mapeadores.archMaestros;
 
+
 import com.patitas.api.app.dominio.entidades.archMaestro.Veterinario;
+import com.patitas.api.app.dominio.modelo.respuesta.archMaestros.VeterinarioRespuesta;
 import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.VeterinarioJpa;
 
 public class VeterinarioMapper {
@@ -17,6 +19,14 @@ public class VeterinarioMapper {
 				vetJpa.getId(),
 				UsuarioMapper.mapDeEntidadJpaADominio(vetJpa.getIdUsu())
 				);
+	}
+	
+	public static VeterinarioRespuesta  mapDeEntidadJpaAVeterinarioRespuesta(VeterinarioJpa vetJpa) {
+		return new VeterinarioRespuesta(vetJpa.getId()
+				,vetJpa.getIdUsu().getNombre(),
+				vetJpa.getIdUsu().getApellidos(),
+				vetJpa.getLstHorarios()
+					);
 	}
 
 }

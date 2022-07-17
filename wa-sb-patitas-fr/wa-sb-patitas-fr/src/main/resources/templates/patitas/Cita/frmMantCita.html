@@ -58,6 +58,7 @@
 					<div class="input-group mb-3">
 						<input type="text" class="form-control" id="txtcliente"
 							>
+						<input type="hidden" id="idCliente">
 						<button class="btn btn-outline-secondary" type="button"
 							id="btnBuscarCliente">Buscar</button>
 
@@ -77,28 +78,29 @@
 					</div>
 
 					<div class="mb-3">
-						<label for="txtveterinario" class="form-label">Veterinario</label>
-						<input type="text" class="form-control" id="txtveterinario">
-						<span id="errorveterinario" class="text-danger"></span>
+						<label for="txtVet" class="form-label">Veterinario</label>
+						<div class="col-sm-8">
+							<select class="form-control" id="cboVet" name="txtVet"
+								required>
+								<option value="0">Seleccione el veterinario</option>
+								
+							</select>
+						</div>
+						<br>
+						<div id="msgVet"></div>
 					</div>
 
 					<div class="mb-3">
 						<label for="txtrecepcionista" class="form-label">Recepcionista</label>
-						<input type="text" class="form-control" id="txtrecepcionista">
+						<input type="text" class="form-control" id="txtrecepcionista"  placeholder="Andrea" readonly>
 						<span id="errorrecepcionista" class="text-danger"></span>
 					</div>
 
-					<div class="mb-3">
-						<label for="txtfecharegistro" class="form-label">Fecha de
-							Registro</label> <input type="date" class="form-control"
-							id="txtfecharegistro"> <span id="errorfecharegistro"
-							class="text-danger"></span>
-					</div>
 
 					<div class="mb-3">
 						<label for="txtfechaatencion" class="form-label">Fecha de
-							Atencion</label> <input type="date" class="form-control"
-							id="txtfechaatencion"> <span id="errorfechaatencion"
+							Atencion</label> <input type="datetime-local" class="form-control"
+							id="txtfechaatencion"> <span id="n   "
 							class="text-danger"></span>
 					</div>
 

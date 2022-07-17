@@ -35,13 +35,15 @@ public class CitaHttp {
 	    	    MediaType mediaType = MediaType.parse("application/json");
 	    	    RequestBody body = RequestBody.create(mediaType, "{\r\n    "
 	    	    		+ "\"idCita\":\""+cit.getId()+"\",\r\n    "
-	    	    		+ "\"idCliente\":\""+cit.getCliente()+"\"\r\n}"
-	    	    		+ "\"idMascota\":\""+cit.getMascota()+"\"\r\n}"
-	    	    		+ "\"idVeterinario\":\""+cit.getVeterinario()+"\"\r\n}"
-	    	    		+ "\"idRecepcionista\":\""+cit.getVeterinario()+"\"\r\n}"
-	    	    		+ "\"fechaRegistro\":\""+cit.getFechaRegistro()+"\"\r\n}"
-	    	    		+ "\"fechaAtencion\":\""+cit.getFechaAtencion()+"\"\r\n}"
+	    	    		+ "\"idCliente\":\""+cit.getCliente().get("id")+"\",\r\n"
+	    	    		+ "\"idMascota\":\""+cit.getMascota().get("idMascota")+"\",\r\n"
+	    	    		+ "\"idVeterinario\":\""+cit.getVeterinario().get("id")+"\",\r\n"
+	    	    		+ "\"idRecepcionista\":\""+cit.getRecepcionista().get("idRecepcionista")+"\",\r\n"
+	    	    		+ "\"fechaRegistro\":\""+cit.getFechaRegistro()+"\",\r\n"
+	    	    		+ "\"fechaAtencion\":\""+cit.getFechaAtencion()+"\",\r\n"
 	    	    		+ "\"pendiente\":\""+cit.getPendiente()+"\"\r\n}");
+	    	    
+	    	    System.out.println(cit.getCliente().get("id") + " " +cit.getMascota().get("idMascota") );
 	    	    Request request = new Request.Builder()
 	    	      .url("http://localhost:8070/api/cita/crear")
 	    	      .method("POST", body)
