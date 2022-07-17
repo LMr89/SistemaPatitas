@@ -1,6 +1,9 @@
 package com.patitas.app.util;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -35,13 +38,15 @@ public class CitaHttp {
 	    	    MediaType mediaType = MediaType.parse("application/json");
 	    	    RequestBody body = RequestBody.create(mediaType, "{\r\n    "
 	    	    		+ "\"idCita\":\""+cit.getId()+"\",\r\n    "
-	    	    		+ "\"idCliente\":\""+cit.getCliente()+"\"\r\n}"
-	    	    		+ "\"idMascota\":\""+cit.getMascota()+"\"\r\n}"
-	    	    		+ "\"idVeterinario\":\""+cit.getVeterinario()+"\"\r\n}"
-	    	    		+ "\"idRecepcionista\":\""+cit.getVeterinario()+"\"\r\n}"
-	    	    		+ "\"fechaRegistro\":\""+cit.getFechaRegistro()+"\"\r\n}"
-	    	    		+ "\"fechaAtencion\":\""+cit.getFechaAtencion()+"\"\r\n}"
+	    	    		+ "\"idCliente\":\""+cit.getCliente().get("id")+"\",\r\n"
+	    	    		+ "\"idMascota\":\""+cit.getMascota().get("idMascota")+"\",\r\n"
+	    	    		+ "\"idVeterinario\":\""+cit.getVeterinario().get("id")+"\",\r\n"
+	    	    		+ "\"idRecepcionista\":\""+cit.getRecepcionista().get("idRecepcionista")+"\",\r\n"
+	    	    		+ "\"fechaRegistro\":\""+CitaHttp.parsearCalendarAString(cit.getFechaRegistro())+"\",\r\n"
+	    	    		+ "\"fechaAtencion\":\""+CitaHttp.parsearCalendarAString(cit.getFechaAtencion())+"\",\r\n"
 	    	    		+ "\"pendiente\":\""+cit.getPendiente()+"\"\r\n}");
+	    	    
+	    	    //System.out.println(CitaHttp.parsearCalendarAString(cit.getFechaRegistro()));
 	    	    Request request = new Request.Builder()
 	    	      .url("http://localhost:8070/api/cita/crear")
 	    	      .method("POST", body)
@@ -65,8 +70,8 @@ public class CitaHttp {
 	    	    		+ "\"idMascota\":\""+cit.getMascota()+"\"\r\n}"
 	    	    		+ "\"idVeterinario\":\""+cit.getVeterinario()+"\"\r\n}"
 	    	    		+ "\"idRecepcionista\":\""+cit.getVeterinario()+"\"\r\n}"
-	    	    		+ "\"fechaRegistro\":\""+cit.getFechaRegistro()+"\"\r\n}"
-	    	    		+ "\"fechaAtencion\":\""+cit.getFechaAtencion()+"\"\r\n}"
+	    	    		+ "\"fechaRegistro\":\""+CitaHttp.parsearCalendarAString(cit.getFechaRegistro())+"\"\r\n}"
+	    	    		+ "\"fechaAtencion\":\""+CitaHttp.parsearCalendarAString(cit.getFechaAtencion())+"\"\r\n}"
 	    	    		+ "\"pendiente\":\""+cit.getPendiente()+"\"\r\n}");
 	    	    Request request = new Request.Builder()
 	    	      .url("http://localhost:8070/api/cita/actualizar")
@@ -112,4 +117,14 @@ public class CitaHttp {
 				
 		return clienteEncontrado;
 	}
+	public static String parsearCalendarAString(Calendar cal) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+		Date d = cal.getTime();
+		String formato = sdf.format(d);
+	
+		return formato ;
+	}
 }
+
+
+

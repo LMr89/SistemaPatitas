@@ -39,15 +39,28 @@ public class VeterinarioJpa {
 	
 	
 	public VeterinarioJpa(Integer id, UsuarioJpa idUsu) {
-		super();
 		this.id = id;
 		this.idUsu = idUsu;
 	}
+	
+	
+
+	public VeterinarioJpa(Integer id, List<DiagnosticoJpa> lstDiagnosticos, List<HorarioJpa> lstHorarios) {
+		this.id = id;
+		this.lstDiagnosticos = lstDiagnosticos;
+		this.lstHorarios = lstHorarios;
+	}
+
 
 
 	@JsonManagedReference(value = "diag-vet")
 	@OneToMany(mappedBy = "idVet", cascade = CascadeType.ALL)
 	private List<DiagnosticoJpa> lstDiagnosticos;
+	
+	
+	@JsonManagedReference(value = "horario-vet")
+	@OneToMany(mappedBy = "idVet", cascade = CascadeType.ALL)
+	private List<HorarioJpa> lstHorarios;
 
 	
 	
