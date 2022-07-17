@@ -112,6 +112,49 @@ function obtenerVeterinarios() {
 		dataType: 'json',
 
 		success: function(resultado) {
+
+			diccionario_vete = resultado;
+
+
+			$("#cboVet").html("");
+
+			$("#cboVet").append(
+
+				"<div class=\"mb-3\">" +
+				"	<select id=\"cboVet\" class=\"form-select\" aria-label=\"Default select example\" required>"
+				//"			<option value=\"0\">Seleccione el veterinario</option>"
+			);
+			$("#cboVet").append("<option value=\"0\">Seleccione el veterinario</option>");
+			for (let i = 0; i < resultado.length; i++) {
+				$("#cboVet").append("<option value=\"" + resultado[i].id + "\">" + resultado[i].nombre + " " + resultado[i].apellidos + "</option>");
+
+				if (resultado.estado) {
+					$("#idCliente").val(resultado.id);
+
+					mostrarMensaje("Cliente: " + resultado.nombre + " " + resultado.apellidos, "success")
+					obtenerMascotasDelCliente(resultado.id);
+
+				}
+
+				$("#cboVet").append("</select></div>");
+
+			}
+		}
+
+	});
+}
+
+
+
+
+function obtenerVeterinarios() {
+	$.ajax({
+		type: "GET",
+		contentType: "application/json",
+		url: "/Veterinario/listar-vet",
+		dataType: 'json',
+
+		success: function(resultado) {
 			diccionario_vete = resultado;
 
 
@@ -171,7 +214,7 @@ function obtenerMascotasDelCliente(idCliente) {
 
 /*Metodo que registrara la cita pero ya validadndo los campos*/
 $(document).on("click", "#btnregistrarcita", function() {
-	$("#mensaje").html("")
+
 	if (validacionModal()) {
 		$.ajax({
 			type: "POST",
@@ -183,9 +226,11 @@ $(document).on("click", "#btnregistrarcita", function() {
 				mascota: { "idMascota": $("#cboMascota option:selected").val() },
 				veterinario: { "id": $("#cboVet option:selected").val() },
 				recepcionista: { "idRecepcionista": 1 },
+
 				fechaRegistro: new Date().toISOString(),
 				fechaAtencion: new Date($("#txtfechaatencion").val()).toISOString(),
 				pendiente: true
+
 			}),
 			success: function(resultado) {
 				if (resultado.respuesta) {
@@ -246,45 +291,50 @@ function validacionModal() {
 		//mostrarMensaje("Es obligatorio buscar un cliente", "danger");
 		$("#errCliente").text("Es obligatorio buscar un cliente");
 		ok = false;
-	}else{
+		console.log("Cliente: " + ok )
+	} else {
 		$("#errCliente").text("");
+		//mostrarMensaje("Es obligatorio buscar un cliente", "danger");
+		ok = false;
 	}
 
 	if ($("#cboMascota option:selected").text() === "Seleccione la mascota") {
 		$("#errormascota").text("Es obligarotio escoger una mascota");
 		ok = false;
+		console.log("cboMascota: " + ok )
 	} else {
 		$("#errormascota").text("");
 	}
 
 	if ($("#cboVet option:selected").text() === "Seleccione el veterinario") {
 		//mostrarMensajeVet("Es obligarotio escoger un veterinario", "danger");
-			$("#errVet").text("Es obligarotio escoger un veterinario");
+		$("#errVet").text("Es obligarotio escoger un veterinario");
 		ok = false;
+		console.log("cboVet: " + ok )
 	} else {
 		$("#errVet").html("");
 	}
 
 	//alert($("#txtfechaatencion").val() === NaN? "Vacio":"lleno");
 	var fechaInput = new Date($("#txtfechaatencion").val());
-	if(fechaInput < Date.now()){
+	if (fechaInput < Date.now()) {
 		$("#errorfechaatencion").text("La fecha escogida no debe ser menor a la fecha actual");
 		ok = false;
-	}else{
-		if (validarHorasConVeterinario() !== true) {
-		$("#errorfechaatencion").text("La fecha de atencion no coincide con el horario del veterinario");
-		ok = false;
 	} else {
-		$("#errorfechaatencion").text("");
+		if (validarHorasConVeterinario() !== true) {
+			$("#errorfechaatencion").text("La fecha de atencion no coincide con el horario del veterinario");
+			ok = false;
+		} else {
+			$("#errorfechaatencion").text("");
+			ok = true;
+		}
 	}
-	}
+	console.log("txtfechaatencion: " + ok )
+	console.log("Modal validado: " + ok )
+	return ok;
 	
 
-
-	return ok;
-
 }
-
 
 
 
@@ -326,6 +376,8 @@ function validarHorasConVeterinario() {
 				}
 			}
 		}
+
+
 	}
 
 	/*Validacion final del turno*/
@@ -333,10 +385,14 @@ function validarHorasConVeterinario() {
 		horaOk = true;
 	}
 
-	console.log(horaOk);
+	
 	return horaOk;
 
 }
+
+
+
+
 
 function listarCitas() {
 	$.ajax({

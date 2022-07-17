@@ -46,7 +46,8 @@ public class CitaHttp {
 	    	    		+ "\"fechaAtencion\":\""+CitaHttp.parsearCalendarAString(cit.getFechaAtencion())+"\",\r\n"
 	    	    		+ "\"pendiente\":\""+cit.getPendiente()+"\"\r\n}");
 	    	    
-	    	    //System.out.println(CitaHttp.parsearCalendarAString(cit.getFechaRegistro()));
+	    	    
+	    	    System.out.println(cit.getCliente().get("id") + " " +cit.getMascota().get("idMascota") );
 	    	    Request request = new Request.Builder()
 	    	      .url("http://localhost:8070/api/cita/crear")
 	    	      .method("POST", body)
