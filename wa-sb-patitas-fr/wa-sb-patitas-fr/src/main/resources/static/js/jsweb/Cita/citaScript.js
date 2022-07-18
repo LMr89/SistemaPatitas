@@ -7,6 +7,9 @@ $(document).on("click", "#btnListar", function() {
 });
 
 $(document).on("click", "#btngenerarCita", function() {
+	$("#msgVet").html("")
+	$("#mensaje").html("")
+
 	$("#txtcliente").val("");
 	$("#txtmascota").val("");
 	$("#txtveterinario").val("");
@@ -22,8 +25,10 @@ $(document).on("click", "#btngenerarCita", function() {
 	/*Cargar nombre de la recepcionista*/
 	$("#txtrecepcionista").text("Andrea");
 
+	alert($("#hddidcita").val());
 	$("#modalcita").modal("show");
 });
+
 
 /*Funcion que escuchara los cambios del combobox de veterinarios y este cargara los horarios de cada uno*/
 
@@ -53,20 +58,28 @@ $("#cboVet").change(function() {
 	} else {
 		$("#msgVet").html("")
 	}
-	console.log(diccionario_horariosVet);
+
 
 });
 
 
 $(document).on("click", ".btnactualizarcita", function() {
-	$("#txtcliente").val($(this).attr("data-cliente"));
-	$("#txtmascota").val($(this).attr("data-mascota"));
-	$("#txtveterinario").val($(this).attr("data-veterinario"));
-	$("#txtrecepcionista").val($(this).attr("data-recepcionista"));
-	$("#txtfecharegistro").val($(this).attr("data-fecharegistro"));
+
+
+
+	$("#txtcliente").val($(this).attr("data-dnicliente"));
+	$("#btnBuscarCliente").trigger("click"); // Se auto ejecuta el boton
+
+
+	obtenerVeterinarios();
+
+	$("#cboVet").val($(this).attr("data-veterinario"));
+
+	$("#txtrecepcionista").val($(this).attr("data-codrecepcionista"));
 	$("#txtfechaatencion").val($(this).attr("data-fechaatencion"));
 	$("#txtpendiente").val($(this).attr("data-pendiente"));
-	$("#hddidcita").val($(this).attr("data-codusuario"));
+	$("#hddidcita").val($(this).attr("data-codcita"));
+	alert($("#hddidcita").val());
 	$("#modalcita").modal("show");
 });
 
@@ -145,8 +158,6 @@ function obtenerVeterinarios() {
 }
 
 
-
-
 function obtenerVeterinarios() {
 	$.ajax({
 		type: "GET",
@@ -177,7 +188,6 @@ function obtenerVeterinarios() {
 	})
 
 }
-
 
 
 function obtenerMascotasDelCliente(idCliente) {
@@ -212,110 +222,165 @@ function obtenerMascotasDelCliente(idCliente) {
 
 };
 
+
 /*Metodo que registrara la cita pero ya validadndo los campos*/
 $(document).on("click", "#btnregistrarcita", function() {
 
-	if (validacionModal()) {
-		$.ajax({
-			type: "POST",
-			contentType: "application/json",
-			url: "/Cita/registrarCita",
-			data: JSON.stringify({
-				id: 0,
-				cliente: { "id": $("#idCliente").val() },
-				mascota: { "idMascota": $("#cboMascota option:selected").val() },
-				veterinario: { "id": $("#cboVet option:selected").val() },
-				recepcionista: { "idRecepcionista": 1 },
+	if ($("#hddidcita").val() == 0) {
+		//Si el codigo de cita es distinto de 0 este es un registro		
+		if (validacionModal()) {
+			$.ajax({
+				type: "POST",
+				contentType: "application/json",
+				url: "/Cita/registrarCita",
+				data: JSON.stringify({
+					id: 0,
+					cliente: { "id": $("#idCliente").val() },
+					mascota: { "idMascota": $("#cboMascota option:selected").val() },
+					veterinario: { "id": $("#cboVet option:selected").val() },
+					recepcionista: { "idRecepcionista": 1 },
 
-				fechaRegistro: new Date().toISOString(),
-				fechaAtencion: new Date($("#txtfechaatencion").val()).toISOString(),
-				pendiente: true
+					fechaRegistro: new Date().toISOString(),
+					fechaAtencion: new Date($("#txtfechaatencion").val()).toISOString(),
+					pendiente: true
 
-			}),
-			success: function(resultado) {
-				if (resultado.respuesta) {
-					mostrarMensaje(resultado.mensaje, "success")
+				}),
+				success: function(resultado) {
+					if (resultado.respuesta) {
+						alertNotificadora("Cita registrada exitosamente", "success")
+						listarCitas();
+						$("#modalcita").modal("hide");
+					}
+					else {
+						alertNotificadora(resultado.mensaje, "error")
+					}
 				}
-				else {
-					mostrarMensaje(resultado.mensaje, "danger")
+			})
+
+
+		}
+	} else {
+		if (validacionModal()) {
+			//En el caso que el codigo es distinto de 0 este se actualizara
+			$.ajax({
+				type: "PUT",
+				contentType: "application/json",
+				url: "/Cita/actualizarCita",
+				data: JSON.stringify({
+					id: $("#hddidcita").val(),
+					cliente: { "id": $("#idCliente").val() },
+					mascota: { "idMascota": $("#cboMascota option:selected").val() },
+					veterinario: { "id": $("#cboVet option:selected").val() },
+					recepcionista: { "idRecepcionista": 1 },
+
+					fechaRegistro: new Date().toISOString(),
+					fechaAtencion: new Date($("#txtfechaatencion").val()).toISOString(),
+					pendiente: true
+
+				}),
+				success: function(resultado) {
+					if (resultado.respuesta) {
+						alertNotificadora("Cita actualizada exitosamente", "success")
+						listarCitas();
+						$("#hddidcita").val(0);
+						$("#modalcita").modal("hide");
+					}
+					else {
+						alertNotificadora(resultado.mensaje, "error")
+					}
 				}
-			}
-		})
-		$("#modalcita").modal("hide");
-		listarCitas();
-	}
+			})
+
+		}
+
+	};
+
+
+
+
 
 
 });
 
 
+$(document).on("click", ".btneliminarcita", function() {
+	var nombreCliente = $(this).attr("data-nomCliente");
 
+	var codigoCita = String($(this).attr("data-codcita"));
+	//alert(codigoCita);
 
-$(document).on("click", ".btneliminarusuario", function() {
-	$("#hddidusuarioeliminar").val("");
-	$("#mensajeeliminar").text("¿esta seguro de eliminar al usuario: " +
-		$(this).attr("data-nombre") + "?");
-	$("#hddidusuarioeliminar").val($(this).attr("data-codusuario"));
-
-	$("#modaleliminarusuario").modal("show");
-});
-
-$(document).on("click", "#btneliminarusuario", function() {
-
-	$.ajax({
-		type: "DELETE",
-		contentType: "application/json",
-		url: "/Usuario/eliminarUsuario",
-		data: JSON.stringify({
-			id: $("#hddidusuarioeliminar").val(),
-
-		}),
-		success: function(resultado) {
-			if (resultado.respuesta) {
-				mostrarMensaje(resultado.mensaje, "success")
-				ListarUsuarios();
+	Swal.fire({
+		title: '¿Desea cancelar la cita del cliente ' + nombreCliente,
+		text: "No se revertiran los cambios",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonColor: '#3085d6',
+		cancelButtonColor: '#d33',
+		confirmButtonText: 'Si, cancelar'
+	}).then((result) => {
+		if (result.isConfirmed) {
+			if (eliminarCita(codigoCita)) {
+				Swal.fire(
+					'Cancelado con exito!',
+					'La cita fue cancelada.',
+					'success'
+				)
+				listarCitas();
 			}
-			else {
-				mostrarMensaje(resultado.mensaje, "danger")
-			}
-			$("#modaleliminarusuario").modal("hide");
+
 		}
 	})
 
 });
 
+function eliminarCita(idCita) {
+	var eliminado = true;
+	$.ajax({
+		type: "DELETE",
+		contentType: "application/json",
+		url: "/Cita/eliminarCita/" + idCita,
+		//data: JSON.stringify({
+		//	idEliminar: idCita
+		//}),
+		success: function(resultado) {
+			if (!resultado.respuesta) {
+				eliminado = false;
+
+			}
+		}
+
+	});
+	return eliminado;
+}
+
 function validacionModal() {
 	var ok = true;
 
 	if ($("#txtcliente").val() === "") {
-		//mostrarMensaje("Es obligatorio buscar un cliente", "danger");
 		$("#errCliente").text("Es obligatorio buscar un cliente");
 		ok = false;
-		console.log("Cliente: " + ok )
+		console.log("Cliente: " + ok)
 	} else {
 		$("#errCliente").text("");
-		//mostrarMensaje("Es obligatorio buscar un cliente", "danger");
 		ok = false;
 	}
 
 	if ($("#cboMascota option:selected").text() === "Seleccione la mascota") {
 		$("#errormascota").text("Es obligarotio escoger una mascota");
 		ok = false;
-		console.log("cboMascota: " + ok )
+		console.log("cboMascota: " + ok)
 	} else {
 		$("#errormascota").text("");
 	}
 
 	if ($("#cboVet option:selected").text() === "Seleccione el veterinario") {
-		//mostrarMensajeVet("Es obligarotio escoger un veterinario", "danger");
 		$("#errVet").text("Es obligarotio escoger un veterinario");
 		ok = false;
-		console.log("cboVet: " + ok )
+		console.log("cboVet: " + ok)
 	} else {
 		$("#errVet").html("");
 	}
 
-	//alert($("#txtfechaatencion").val() === NaN? "Vacio":"lleno");
 	var fechaInput = new Date($("#txtfechaatencion").val());
 	if (fechaInput < Date.now()) {
 		$("#errorfechaatencion").text("La fecha escogida no debe ser menor a la fecha actual");
@@ -329,13 +394,12 @@ function validacionModal() {
 			ok = true;
 		}
 	}
-	console.log("txtfechaatencion: " + ok )
-	console.log("Modal validado: " + ok )
+	console.log("txtfechaatencion: " + ok)
+	console.log("Modal validado: " + ok)
 	return ok;
-	
+
 
 }
-
 
 
 function validarHorasConVeterinario() {
@@ -385,13 +449,10 @@ function validarHorasConVeterinario() {
 		horaOk = true;
 	}
 
-	
+
 	return horaOk;
 
 }
-
-
-
 
 
 function listarCitas() {
@@ -402,6 +463,7 @@ function listarCitas() {
 		success: function(resultado) {
 			$("#tblcita > tbody").html("");
 			$.each(resultado, function(index, value) {
+
 				$("#tblcita > tbody").append("<tr>" +
 					"<td>" + value.id + "</td>" +
 					"<td>" + value.cliente["nombre"] + "</td>" +
@@ -412,30 +474,38 @@ function listarCitas() {
 					"<td>" + new Date(value.fechaAtencion).toUTCString() + "</td>" +
 					"<td>" + (value.pendiente ? "Activo" : "Inactivo") + "</td>" +
 					"<td><button type =\"button\" class=\"btn btn-primary btnactualizarcita\"" +
-					"	th:data-codcita=\"" + value.id + "\"" +
-					"	th:data-codcliente=\"" + value.cliente + "\"" +
-					"	th:data-codmascota=\"" + value.mascota + "\"" +
-					"	th:data-codveterinario=\"" + value.veterinario + "\"" +
-					"	th:data-codrecepcionista=\"" + value.recepcionista + "\"" +
-					"	th:data-fecharegistro=\"" + value.fechaRegistro + "\"" +
-					"	th:data-fechaatencion=\"" + value.fechaAtencion + "\"" +
-					"	th:data-pendiente=\"" + value.pendiente + "\">Actualizar</button >" +
+					"	data-codcita=\"" + value.id + "\"" +
+					"	data-dnicliente=\"" + value.cliente["dni"] + "\"" +
+					"	data-codmascota=\"" + value.mascota["idMascota"] + "\"" +
+					"	data-codveterinario=\"" + value.veterinario["id"] + "\"" +
+					"	data-codrecepcionista=\"" + value.recepcionista["nombre"] + "\"" +
+					//"	th:data-fecharegistro=\"" + value.fechaRegistro + "\"" +
+					"	data-fechaatencion=\"" + value.fechaAtencion + "\"" +
+					"	data-pendiente=\"" + value.pendiente + "\">Modificar</button >" +
 					"</td >" +
 					"<td>" +
 					"	<button type=\"button\" class=\"btn btn-danger btneliminarcita\"" +
-					"		th:data-codcliente=\"" + value.id + "\"" +
-					"		th:data-codmascota=\"" + value.mascota + "\"" +
-					"		th:data-codveterinario=\"" + value.veterinario + "\"" +
-					"		th:data-codrecepcionista=\"" + value.recepcionista + "\"" +
-					"		th:data-fecharegistro=\"" + value.fechaRegistro + "\"" +
-					"		th:data-fechaatencion=\"" + value.fechaAtencion + "\"" +
-					"		th:data-pendiente=\"" + value.pendiente + "\">Eliminar</button>" +
+					"		data-codcita=\"" + value.id + "\"" +
+					"		data-nomCliente=\"" + value.cliente["nombre"] + "\"" +
+					"		data-pendiente=\"" + value.pendiente + "\">Cancelar</button>" +
 
 					"</td>" +
 					"</tr>"
 				)
 			})
 		}
+	})
+}
+
+
+function alertNotificadora(msg, icon) {
+
+	Swal.fire({
+		//position: 'top-end',
+		icon: icon,
+		title: msg,
+		showConfirmButton: false,
+		timer: 2500
 	})
 }
 
@@ -448,6 +518,8 @@ function mostrarMensaje(mensaje, estilo) {
 		"</div>")
 
 }
+
+
 function mostrarMensajeVet(mensaje, estilo) {
 	$("#msgVet").html("")
 	$("#msgVet").append("<div class='alert alert-" + estilo + " alert-dismissible fade show' role='alert'>" +

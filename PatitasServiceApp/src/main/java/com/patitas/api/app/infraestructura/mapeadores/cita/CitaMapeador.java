@@ -41,7 +41,7 @@ public class CitaMapeador {
 	public static CitaRespuesta mapDeDominioACitaRespuesta(Cita cita) {
 		return new CitaRespuesta(
 				cita.getId(),
-				new ClienteRespuesta(cita.getIdCliente().getId(), cita.getIdCliente().getNombre(),cita.getIdCliente().getApellidos()),
+				new ClienteRespuesta(cita.getIdCliente().getId(), cita.getIdCliente().getNombre(),cita.getIdCliente().getApellidos(),cita.getIdCliente().getDni()),
 				new MascotaRespuesta(cita.getIdMascota().getId(), cita.getIdMascota().getNombre()),
 				new VeterinarioRespuesta(cita.getIdVeterinario().getId(), cita.getIdVeterinario().getIdUSuario().getNombre(), cita.getIdVeterinario().getIdUSuario().getApellidos()),
 				new RecepcionistaRespuesta(cita.getIdRecepcionista().getId(), cita.getIdRecepcionista().getIdUsuario().getNombre()),

@@ -31,7 +31,8 @@ public class LoginController {
 			respuesta = LoginHttp.iniciarsesion(objLogin);
 			if(respuesta.getEsAutenticado() != false) {
 				model.addAttribute("mensaje",respuesta.getMensaje());
-				return "patitas/layout";
+				
+				return "patitas/home";
 			}
 			else {
 				model.addAttribute("visualizar", true);

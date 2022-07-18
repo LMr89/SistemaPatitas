@@ -67,12 +67,12 @@ public class CitaHttp {
 	    	    MediaType mediaType = MediaType.parse("application/json");
 	    	    RequestBody body = RequestBody.create(mediaType, "{\r\n    "
 	    	    		+ "\"idCita\":\""+cit.getId()+"\",\r\n    "
-	    	    		+ "\"idCliente\":\""+cit.getCliente()+"\"\r\n}"
-	    	    		+ "\"idMascota\":\""+cit.getMascota()+"\"\r\n}"
-	    	    		+ "\"idVeterinario\":\""+cit.getVeterinario()+"\"\r\n}"
-	    	    		+ "\"idRecepcionista\":\""+cit.getVeterinario()+"\"\r\n}"
-	    	    		+ "\"fechaRegistro\":\""+CitaHttp.parsearCalendarAString(cit.getFechaRegistro())+"\"\r\n}"
-	    	    		+ "\"fechaAtencion\":\""+CitaHttp.parsearCalendarAString(cit.getFechaAtencion())+"\"\r\n}"
+	    	    		+ "\"idCliente\":\""+cit.getCliente().get("id")+"\",\r\n"
+	    	    		+ "\"idMascota\":\""+cit.getMascota().get("idMascota")+"\",\r\n"
+	    	    		+ "\"idVeterinario\":\""+cit.getVeterinario().get("id")+"\",\r\n"
+	    	    		+ "\"idRecepcionista\":\""+cit.getRecepcionista().get("idRecepcionista")+"\",\r\n"
+	    	    		+ "\"fechaRegistro\":\""+CitaHttp.parsearCalendarAString(cit.getFechaRegistro())+"\",\r\n"
+	    	    		+ "\"fechaAtencion\":\""+CitaHttp.parsearCalendarAString(cit.getFechaAtencion())+"\",\r\n"
 	    	    		+ "\"pendiente\":\""+cit.getPendiente()+"\"\r\n}");
 	    	    Request request = new Request.Builder()
 	    	      .url("http://localhost:8070/api/cita/actualizar")
@@ -87,21 +87,24 @@ public class CitaHttp {
 			return codigo;	
 	}
 	
-	public static String eliminarCita(Cita cit) throws IOException{
-	    OkHttpClient client = new OkHttpClient().newBuilder()
-	    	      .build();
-	    	    MediaType mediaType = MediaType.parse("text/plain");
-	    	    RequestBody body = RequestBody.create(mediaType, "{\n        "
-						+ "\"id\": "+cit.getId());
-	    	    Request request = new Request.Builder()
-	    	      .url("http://localhost:8070/api/cita/eliminar")
-	    	      .method("DELETE", body)
-	    	      .build();
+	public static String eliminarCita(String id) throws IOException{
+		final String URL = "http://localhost:8070/api/cita/eliminar/" + id;
+		OkHttpClient client = new OkHttpClient().newBuilder()
+				  .build();
+				MediaType mediaType = MediaType.parse("text/plain");
+				RequestBody body = RequestBody.create(mediaType, "");
+				Request request = new Request.Builder()
+				  .url(URL)
+				  .method("DELETE", body)
+				  .build();
 				Response response = client.newCall(request).execute();
-				String codigo =("Codigo de respuesta: " + response.code());							
+
+				String codigo = "";							
 				if(response.isSuccessful()) {
 					codigo = response.body().string();												
 				}
+				
+
 			return codigo;
 	}
 

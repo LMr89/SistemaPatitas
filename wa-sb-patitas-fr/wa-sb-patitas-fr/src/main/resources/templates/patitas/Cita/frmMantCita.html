@@ -17,7 +17,7 @@
 			<button type="button" class="btn btn-success" id="btnListar">Listar
 				Citas</button>
 			<hr />
-			
+
 			<table class="table" id="tblcita">
 				<thead>
 					<tr>
@@ -56,12 +56,11 @@
 
 					<label for="txtcliente" class="form-label">Cliente</label>
 					<div class="input-group mb-3">
-						<input type="text" class="form-control" id="txtcliente"
-							>
-						<input type="hidden" id="idCliente">
+						<input type="text" class="form-control" id="txtcliente"> <input
+							type="hidden" id="idCliente">
 						<button class="btn btn-outline-secondary" type="button"
 							id="btnBuscarCliente">Buscar</button>
-						
+
 					</div>
 					<span id="errCliente" class="text-danger"></span>
 					<div id="mensaje"></div>
@@ -80,30 +79,27 @@
 					<div class="mb-3">
 						<label for="txtVet" class="form-label">Veterinario</label>
 						<div class="col-sm-8">
-							<select class="form-control" id="cboVet" name="txtVet"
-								required>
+							<select class="form-control" id="cboVet" name="txtVet" required>
 								<option value="0">Seleccione el veterinario</option>
-								
+
 							</select>
 						</div>
-						<br>
-
-						<span id="errVet" class="text-danger"></span>
+						<br> <span id="errVet" class="text-danger"></span>
 
 						<div id="msgVet"></div>
 					</div>
 
 					<div class="mb-3">
 						<label for="txtrecepcionista" class="form-label">Recepcionista</label>
-						<input type="text" class="form-control" id="txtrecepcionista"  placeholder="Andrea" readonly>
-						<span id="errorrecepcionista" class="text-danger"></span>
+						<input type="text" class="form-control" id="txtrecepcionista"
+							placeholder="Andrea" readonly> <span
+							id="errorrecepcionista" class="text-danger"></span>
 					</div>
 
 
 					<div class="mb-3">
 						<label for="txtfechaatencion" class="form-label">Fecha de
 							Atencion</label> <input type="datetime-local" class="form-control"
-
 							id="txtfechaatencion"> <span id="errorfechaatencion"
 							class="text-danger"></span>
 					</div>
@@ -148,8 +144,12 @@
 		</div>
 	</div>
 
+	
+
 	<script src="/js/jquery/jquery-3.6.0.min.js" type="text/javascript"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="/js/jsweb/Cita/citaScript.js" type="text/javascript"></script>
+	
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.patitas.app.controller.response;
+package com.patitas.app.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.patitas.app.controller.response.ResultadoResponse;
 import com.patitas.app.model.entity.Cliente;
 import com.patitas.app.model.entity.Veterinario;
 import com.patitas.app.util.ClienteHttp;

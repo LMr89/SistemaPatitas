@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.patitas.app.controller.response.ResultadoResponse;
 import com.patitas.app.model.entity.Cita;
 import com.patitas.app.model.entity.Cliente;
-import com.patitas.app.model.entity.Mascota;
 import com.patitas.app.model.response.MascotaResponse;
 import com.patitas.app.util.CitaHttp;
 import com.patitas.app.util.MascotaHttp;
@@ -66,13 +66,13 @@ public class CitaController {
 		return new ResultadoResponse(respuesta, mensaje);
 	}
 	
-	@DeleteMapping("/eliminarUsuario")
+	@DeleteMapping("/eliminarCita/{id}")
 	@ResponseBody
-	public ResultadoResponse eliminarCita(@RequestBody Cita objCita) {
+	public ResultadoResponse eliminarCita(@PathVariable("id") String id) {
 		String mensaje=" " ;
 		Boolean respuesta = true;
 		try {
-			mensaje = CitaHttp.eliminarCita(objCita);
+			mensaje = CitaHttp.eliminarCita(id);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
