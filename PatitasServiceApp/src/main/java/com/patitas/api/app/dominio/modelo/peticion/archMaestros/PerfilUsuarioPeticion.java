@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class PerfilUsuarioPeticion {
+		private Integer idPerfil;
 		private String nombre;
 		private String contraseña;
 		private Integer idAcceso;

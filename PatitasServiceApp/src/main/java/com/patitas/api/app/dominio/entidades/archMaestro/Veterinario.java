@@ -12,5 +12,6 @@ import lombok.Setter;
 public class Veterinario {
 	private Integer id;
 	private Usuario idUSuario;
+	private Boolean estado;
 
 }

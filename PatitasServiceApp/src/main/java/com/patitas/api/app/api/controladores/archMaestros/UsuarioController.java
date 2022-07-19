@@ -84,6 +84,7 @@ public class UsuarioController {
 			
 		} catch (Exception e) {
 			return ResponseEntity.badRequest()
+					.header("Error", e.getMessage())
 					.body("Usuario no eliminado");
 		}
 		

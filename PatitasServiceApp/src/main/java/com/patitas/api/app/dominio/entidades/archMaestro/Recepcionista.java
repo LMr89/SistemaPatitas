@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 public class Recepcionista {
 	private Integer id;
 	private Usuario idUsuario;
+	private Boolean estado;
 
 }

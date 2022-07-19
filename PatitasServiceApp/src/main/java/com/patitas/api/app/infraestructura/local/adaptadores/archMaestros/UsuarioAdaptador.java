@@ -18,12 +18,16 @@ public class UsuarioAdaptador  implements IUsuario{
 	
 	@Autowired
 	private UsuarioRep usuarioRep;
+	
+	@Autowired 
+	private PerfilUsuarioAdaptador perfilUsuarioAdaptador;
 
 	@Override
 	public List<Usuario> listarUsuarios() {
 		
 		return usuarioRep.findAll()
 				.stream()
+				.filter(x -> x.getEstado() == true)
 				.map(UsuarioMapper::mapDeEntidadJpaADominio)
 				.collect(Collectors.toList())
 				;
@@ -32,6 +36,7 @@ public class UsuarioAdaptador  implements IUsuario{
 	@Override
 	public Usuario crearNuevoUsuario(Usuario cli) {
 		UsuarioJpa usuarioCreado = usuarioRep.save(UsuarioMapper.mapDeDominioAEntidadJpa(cli));
+		
 		return  UsuarioMapper.mapDeEntidadJpaADominio(usuarioCreado);
 	}
 
@@ -49,8 +54,17 @@ public class UsuarioAdaptador  implements IUsuario{
 
 	@Override
 	public void eliminarUsuario(Integer id) {
-		usuarioRep.delete(UsuarioMapper.mapDeDominioAEntidadJpa(
-				encontrarUsuarioPorId(id).get()));
+		UsuarioJpa encontrado = UsuarioMapper.mapDeDominioAEntidadJpa(encontrarUsuarioPorId(id).get());
+		encontrado.setEstado(false);
+		
+		//Elimino su perfil de la tabla
+		
+		//Se elimina el registro de la tabla Perfil Usuario
+		actualizarUsuario(UsuarioMapper.mapDeEntidadJpaADominio(encontrado));
+		perfilUsuarioAdaptador.eliminarPerfil(id); 
+
+
+		//usuarioRep.delete());
 		
 	}
 

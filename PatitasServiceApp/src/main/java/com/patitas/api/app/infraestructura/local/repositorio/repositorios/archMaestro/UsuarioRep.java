@@ -23,4 +23,6 @@ public interface UsuarioRep extends JpaRepository<UsuarioJpa, Integer>  {
 			@Param("correo") String correo,
 			@Param("telefono") String telefono,
 			@Param("estado") Boolean estado);
+
+
 }

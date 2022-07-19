@@ -53,6 +53,11 @@ public class UsuarioJpa {
 	@JsonManagedReference(value = "recep-usuario")
 	@OneToMany(mappedBy = "idUsuario", cascade = CascadeType.ALL)
 	private List<RecepcionistaJpa> lstRecepcionista;
+
+
+	@JsonManagedReference(value = "administrador_usuario")
+	@OneToMany(mappedBy = "idUsuario", cascade = CascadeType.ALL)
+	private List<AdministradorJpa> lstAdministrador;
 	
 	public UsuarioJpa(Integer id) {
 		this.id = id;

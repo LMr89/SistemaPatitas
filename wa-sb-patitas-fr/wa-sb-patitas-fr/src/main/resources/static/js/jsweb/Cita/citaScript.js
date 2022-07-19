@@ -63,6 +63,7 @@ $("#cboVet").change(function() {
 });
 
 
+
 $(document).on("click", ".btnactualizarcita", function() {
 
 
@@ -84,9 +85,10 @@ $(document).on("click", ".btnactualizarcita", function() {
 });
 
 
+
 $(document).on("click", "#btnBuscarCliente", function() {
 	if ($("#txtcliente").val() === "") {
-		mostrarMensaje("Es obligatorio buscar un cliente", "danger");
+		mostrarMensaje('Es obligatorio buscar un cliente', "danger");
 		ok = false;
 	} else {
 		$.ajax({

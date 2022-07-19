@@ -54,14 +54,18 @@ public class PerfilController {
 					perfilAdap.encontrarPerfilPorIdUSuario(new Usuario(id));
 			if (perfilEncontrado.isPresent()) {
 				return ResponseEntity.ok(perfilEncontrado.get());
+			}else{
+				return ResponseEntity.ok(new PerfilUsuario(0,"No encontrado",
+						"No encontrado",null,null));
 			}
-			return ResponseEntity.ok(new PerfilUsuario());
-			
+
+
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Perfil no encontrado");
 			return ResponseEntity.badRequest()
 					.header("Error", e.getMessage())
-					.body(new PerfilUsuario());
+					.body(new PerfilUsuario(0,"No encontrado",
+							"No encontrado",null,null));
 		}
 	
 		

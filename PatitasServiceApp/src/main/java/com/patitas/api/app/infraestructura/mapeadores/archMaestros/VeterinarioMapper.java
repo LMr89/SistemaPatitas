@@ -9,7 +9,9 @@ public class VeterinarioMapper {
 	public static  VeterinarioJpa mapDeDominioAEntidadJpa(Veterinario vet) {
 		return new VeterinarioJpa(
 				vet.getId(),
-				UsuarioMapper.mapDeDominioAEntidadJpa(vet.getIdUSuario())
+				UsuarioMapper.mapDeDominioAEntidadJpa(vet.getIdUSuario()),
+				vet.getEstado()
+	
 			
 				);
 	}
@@ -17,7 +19,8 @@ public class VeterinarioMapper {
 	public  static Veterinario mapDeEntidadJpaADominio(VeterinarioJpa vetJpa) {
 		return new Veterinario(
 				vetJpa.getId(),
-				UsuarioMapper.mapDeEntidadJpaADominio(vetJpa.getIdUsu())
+				UsuarioMapper.mapDeEntidadJpaADominio(vetJpa.getIdUsu()),
+				vetJpa.getEstado()
 				);
 	}
 	

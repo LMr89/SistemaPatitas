@@ -8,7 +8,8 @@ public class RecepcionistaMapper {
 	public static  RecepcionistaJpa mapDeDominioAEntidadJpa(Recepcionista  recep) {
 		return new RecepcionistaJpa(
 				recep.getId(),
-				UsuarioMapper.mapDeDominioAEntidadJpa(recep.getIdUsuario())
+				UsuarioMapper.mapDeDominioAEntidadJpa(recep.getIdUsuario()),
+				recep.getEstado()
 			
 				);
 	}
@@ -16,7 +17,8 @@ public class RecepcionistaMapper {
 	public  static Recepcionista mapDeEntidadJpaADominio(RecepcionistaJpa recepJpa) {
 		return new Recepcionista(
 				recepJpa.getIdRecepcionista(),
-				UsuarioMapper.mapDeEntidadJpaADominio(recepJpa.getIdUsuario())
+				UsuarioMapper.mapDeEntidadJpaADominio(recepJpa.getIdUsuario()),
+				recepJpa.getEstado()
 				);
 	}
 

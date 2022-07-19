@@ -34,8 +34,9 @@ public interface PerfilUsuarioRep extends  JpaRepository<PerfilUsuarioJpa, Integ
 	
 	@Transactional
 	@Modifying
-	@Query(value = "{call sp_actualizar(:nmUsuario, :cnUsurio, :acceso, :idUsuario)}", nativeQuery = true) 
+	@Query(value = "{call sp_actualizar(:idPerfil, :nmUsuario, :cnUsurio, :acceso, :idUsuario)}", nativeQuery = true)
 	void actualizarPerfil(
+			@Param("idPerfil") Integer  idPerfil,
 			@Param("nmUsuario") String  user,
 			@Param("cnUsurio") String contraseña,
 			@Param("acceso") Integer idAcceso,

@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.ClienteJpa;
 import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.MascotaJpa;
 import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.RecepcionistaJpa;
@@ -42,10 +43,12 @@ public class CitaJpa {
 	@JoinColumn(name = "idmascota")
 	private MascotaJpa idMascota;
 	
+	@JsonBackReference(value = "vet_cita")
 	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_veterinario")
 	private VeterinarioJpa idVeterinario;
-	
+
+	@JsonBackReference(value = "recep_cita")
 	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "idrecepcionista")
 	private RecepcionistaJpa idRecepcionista;
