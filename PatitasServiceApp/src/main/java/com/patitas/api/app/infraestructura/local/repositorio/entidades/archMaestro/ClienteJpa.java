@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.patitas.api.app.infraestructura.local.repositorio.entidades.cita.CitaJpa;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -68,11 +69,11 @@ public class ClienteJpa implements Serializable {
 	}
 
 
-	/*
-	@JsonManagedReference(value = "mascota-cliente")
-	@OneToMany(mappedBy = "idCli",  cascade = CascadeType.ALL )
-	public List<PerfilUsuarioJpa> lstAccesos;
-	 */
+	
+	@JsonManagedReference(value = "cita-cliente")
+	@OneToMany(mappedBy = "idCliente",  cascade = CascadeType.ALL )
+	public List<CitaJpa> lstCita;
+	 
 
 
 	@JsonManagedReference(value = "mascota-cliente")

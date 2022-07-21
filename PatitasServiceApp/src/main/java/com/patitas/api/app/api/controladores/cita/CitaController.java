@@ -34,7 +34,10 @@ public class CitaController {
 	@GetMapping("/listar")
 	public ResponseEntity< List<CitaRespuesta>> listarCitas() {
 		
-		return ResponseEntity.ok(citaAdap.listarCitas().stream().map(CitaMapeador::mapDeDominioACitaRespuesta)
+		return ResponseEntity.ok(citaAdap.listarCitas()
+				.stream()
+				.filter(c -> c.getEstado() == true)
+				.map(CitaMapeador::mapDeDominioACitaRespuesta)
 				.collect(Collectors.toList()));
 	}
 	

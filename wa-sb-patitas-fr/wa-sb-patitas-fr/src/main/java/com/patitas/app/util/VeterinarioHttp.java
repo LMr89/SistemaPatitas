@@ -28,6 +28,24 @@ public class VeterinarioHttp {
 				});
 		return entity;
 	}
+	public static Integer obtenerIdVeterinarioPorIdCliente(Integer idUsuario) throws IOException {
+		Integer id = 0;
+		OkHttpClient client = new OkHttpClient().newBuilder()
+				  .build();
+				MediaType mediaType = MediaType.parse("text/plain");
+				RequestBody body = RequestBody.create(mediaType, "");
+				Request request = new Request.Builder()
+				  .url("http://localhost:8070/api/veterinario/buscar/"+idUsuario)
+				  .build();
+				Response response = client.newCall(request).execute();
+				if (response.isSuccessful()) {
+					id = Integer.parseInt(response.body().string());
+					
+				}
+				return id;
+	}
+	
+	
 
 	public static String registrarVeterinario(VeterinarioRequest vet) throws IOException {
 		OkHttpClient client = new OkHttpClient().newBuilder().build();

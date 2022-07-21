@@ -1,10 +1,16 @@
 var diccionario_vete = NaN;
 var diccionario_horariosVet = NaN;
 
+
+$(document).ready(function(){
+	listarCitas();
+});
+
 $(document).on("click", "#btnListar", function() {
 	listarCitas();
 
 });
+
 
 $(document).on("click", "#btngenerarCita", function() {
 	$("#msgVet").html("")
@@ -25,13 +31,11 @@ $(document).on("click", "#btngenerarCita", function() {
 	/*Cargar nombre de la recepcionista*/
 	$("#txtrecepcionista").text("Andrea");
 
-	alert($("#hddidcita").val());
+	//alert($("#hddidcita").val());
 	$("#modalcita").modal("show");
 });
 
-
 /*Funcion que escuchara los cambios del combobox de veterinarios y este cargara los horarios de cada uno*/
-
 
 $("#cboVet").change(function() {
 	var idVeterinario = $("#cboVet option:selected").val()
@@ -41,28 +45,27 @@ $("#cboVet").change(function() {
 	for (let i = 0; i < diccionario_vete.length; i++) {
 		if (diccionario_vete[i].id == idVeterinario) {
 			diccionario_horariosVet = diccionario_vete[i].horarios;
-			//console.log("Horarios obtenidos: " + lista_horarios);
-
-			msg_horas += "De: ";
-			for (let i = 0; i < diccionario_horariosVet.length; i++) {
-
-				msg_horas += diccionario_horariosVet[i].fechaInicio + " a " + diccionario_horariosVet[i].fechaFin + "\ny ";
-				//console.log(diccionario_horasVet);
-			}
 			break;
 		}
+
+	}
+
+	if (diccionario_horariosVet.length > 0 ){
+		msg_horas = "Mañana: " + diccionario_horariosVet[0].manInicio + " - "+ diccionario_horariosVet[0].manFin+
+			"<br>Tarde: " + diccionario_horariosVet[0].tarInicio + " - "+ diccionario_horariosVet[0].tarFin;
+
 	}
 	if (msg_horas !== "") {
-
 		mostrarMensajeVet(msg_horas, "success");
+
 	} else {
 		$("#msgVet").html("")
 	}
 
+	//console.log(validarHoras());
+
 
 });
-
-
 
 $(document).on("click", ".btnactualizarcita", function() {
 
@@ -80,11 +83,9 @@ $(document).on("click", ".btnactualizarcita", function() {
 	$("#txtfechaatencion").val($(this).attr("data-fechaatencion"));
 	$("#txtpendiente").val($(this).attr("data-pendiente"));
 	$("#hddidcita").val($(this).attr("data-codcita"));
-	alert($("#hddidcita").val());
+	//alert($("#hddidcita").val());
 	$("#modalcita").modal("show");
 });
-
-
 
 $(document).on("click", "#btnBuscarCliente", function() {
 	if ($("#txtcliente").val() === "") {
@@ -117,7 +118,6 @@ $(document).on("click", "#btnBuscarCliente", function() {
 
 
 });
-
 
 function obtenerVeterinarios() {
 	$.ajax({
@@ -159,7 +159,6 @@ function obtenerVeterinarios() {
 	});
 }
 
-
 function obtenerVeterinarios() {
 	$.ajax({
 		type: "GET",
@@ -190,7 +189,6 @@ function obtenerVeterinarios() {
 	})
 
 }
-
 
 function obtenerMascotasDelCliente(idCliente) {
 	$.ajax({
@@ -224,11 +222,11 @@ function obtenerMascotasDelCliente(idCliente) {
 
 };
 
-
 /*Metodo que registrara la cita pero ya validadndo los campos*/
 $(document).on("click", "#btnregistrarcita", function() {
 
 	if ($("#hddidcita").val() == 0) {
+
 		//Si el codigo de cita es distinto de 0 este es un registro		
 		if (validacionModal()) {
 			$.ajax({
@@ -240,7 +238,7 @@ $(document).on("click", "#btnregistrarcita", function() {
 					cliente: { "id": $("#idCliente").val() },
 					mascota: { "idMascota": $("#cboMascota option:selected").val() },
 					veterinario: { "id": $("#cboVet option:selected").val() },
-					recepcionista: { "idRecepcionista": 1 },
+					recepcionista: { "idRecepcionista": 4 },
 
 					fechaRegistro: new Date().toISOString(),
 					fechaAtencion: new Date($("#txtfechaatencion").val()).toISOString(),
@@ -273,7 +271,7 @@ $(document).on("click", "#btnregistrarcita", function() {
 					cliente: { "id": $("#idCliente").val() },
 					mascota: { "idMascota": $("#cboMascota option:selected").val() },
 					veterinario: { "id": $("#cboVet option:selected").val() },
-					recepcionista: { "idRecepcionista": 1 },
+					recepcionista: { "idRecepcionista": 4  },
 
 					fechaRegistro: new Date().toISOString(),
 					fechaAtencion: new Date($("#txtfechaatencion").val()).toISOString(),
@@ -297,13 +295,7 @@ $(document).on("click", "#btnregistrarcita", function() {
 
 	};
 
-
-
-
-
-
 });
-
 
 $(document).on("click", ".btneliminarcita", function() {
 	var nombreCliente = $(this).attr("data-nomCliente");
@@ -355,50 +347,64 @@ function eliminarCita(idCita) {
 	return eliminado;
 }
 
-function validacionModal() {
-	var ok = true;
+/*Serviran para las validaciones del formulario*/
+const campos = {
+	cliente : false,
+	mascota : false,
+	veterinario : false,
+	fechaAtencion : false
+}
 
+function validacionModal() {
 	if ($("#txtcliente").val() === "") {
 		$("#errCliente").text("Es obligatorio buscar un cliente");
-		ok = false;
-		console.log("Cliente: " + ok)
+		campos['cliente'] = false;
+
 	} else {
 		$("#errCliente").text("");
-		ok = false;
+
+		campos['cliente'] = true;
 	}
 
 	if ($("#cboMascota option:selected").text() === "Seleccione la mascota") {
 		$("#errormascota").text("Es obligarotio escoger una mascota");
-		ok = false;
-		console.log("cboMascota: " + ok)
+		campos['mascota'] = false;
+
 	} else {
 		$("#errormascota").text("");
+		campos['mascota'] = true;
 	}
 
 	if ($("#cboVet option:selected").text() === "Seleccione el veterinario") {
 		$("#errVet").text("Es obligarotio escoger un veterinario");
-		ok = false;
-		console.log("cboVet: " + ok)
+		campos['veterinario'] = false;
+
 	} else {
 		$("#errVet").html("");
+		campos['veterinario'] = true;
 	}
 
 	var fechaInput = new Date($("#txtfechaatencion").val());
 	if (fechaInput < Date.now()) {
 		$("#errorfechaatencion").text("La fecha escogida no debe ser menor a la fecha actual");
-		ok = false;
+		campos['fechaAtencion'] = false;
 	} else {
-		if (validarHorasConVeterinario() !== true) {
+		if (validarHoras() !== true) {
 			$("#errorfechaatencion").text("La fecha de atencion no coincide con el horario del veterinario");
-			ok = false;
+
+			campos['fechaAtencion'] = false;
 		} else {
 			$("#errorfechaatencion").text("");
-			ok = true;
+
+
+			campos['fechaAtencion'] = true;
 		}
 	}
-	console.log("txtfechaatencion: " + ok)
-	console.log("Modal validado: " + ok)
-	return ok;
+	if (campos.cliente && campos.mascota && campos.veterinario && campos.fechaAtencion){
+		return true;
+	}else{
+		return false;
+	}
 
 
 }
@@ -409,7 +415,7 @@ function validarHorasConVeterinario() {
 	var turnoManana = false;
 	var turnoTarde = false;
 
-	var horaInput = new Date($("#txtfechaatencion").val());
+	var horaInput = moment($("#txtfechaatencion").val());
 
 	for (let i = 0; i < diccionario_horariosVet.length; i++) {
 		var horaFechaInicio = parseInt(String(diccionario_horariosVet[i].fechaInicio).substring(0, 2));
@@ -456,8 +462,45 @@ function validarHorasConVeterinario() {
 
 }
 
+function validarHoras(){
+	var horaOk = false;
+	var turnoManana = false;
+	var turnoTarde = false;
+
+	var horaInput = moment($("#txtfechaatencion").val()).format('HH:mm:ss');
+
+	var manInicial = moment(diccionario_horariosVet[0].manInicio,'HH:mm:ss').format('HH:mm:ss');
+	var manFin = moment(diccionario_horariosVet[0].manFin,'HH:mm:ss').format('HH:mm:ss');
+	var tarInicio = moment(diccionario_horariosVet[0].tarInicio,'HH:mm:ss').format('HH:mm:ss');
+	var tarFin = moment(diccionario_horariosVet[0].tarFin,'HH:mm:ss').format('HH:mm:ss');
+
+	if (horaInput >= manInicial  && horaInput < manFin){
+		console.log("turno mañna ok");
+		turnoManana = true
+	}else{
+		console.log("turno mañna mal");
+	}
+
+	if (horaInput >= tarInicio  && horaInput < tarFin){
+		console.log("turno tarde ok");
+		turnoTarde = true;
+
+	}else{
+		console.log("turno tarde mal");
+	}
+
+	if (turnoManana || turnoTarde){
+		horaOk  = true;
+	}
+	return horaOk;
+
+
+}
+
 
 function listarCitas() {
+	const options1 = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+	const formato_ES = new Intl.DateTimeFormat('es-ES', options1);
 	$.ajax({
 		type: "GET",
 		url: "/Cita/listarCitas",
@@ -472,9 +515,9 @@ function listarCitas() {
 					"<td>" + value.mascota["nombre"] + "</td>" +
 					"<td>" + value.veterinario["nombre"] + "</td>" +
 					"<td>" + value.recepcionista["nombre"] + "</td>" +
-					"<td>" + new Date(value.fechaRegistro).toUTCString() + "</td>" +
-					"<td>" + new Date(value.fechaAtencion).toUTCString() + "</td>" +
-					"<td>" + (value.pendiente ? "Activo" : "Inactivo") + "</td>" +
+					"<td>" + formato_ES.format(new Date(value.fechaRegistro))+ "</td>" +
+					"<td>" + formato_ES.format(new Date(value.fechaAtencion)) + "</td>" +
+					"<td>" + (value.pendiente ? "Si" : "No") + "</td>" +
 					"<td><button type =\"button\" class=\"btn btn-primary btnactualizarcita\"" +
 					"	data-codcita=\"" + value.id + "\"" +
 					"	data-dnicliente=\"" + value.cliente["dni"] + "\"" +
@@ -483,16 +526,15 @@ function listarCitas() {
 					"	data-codrecepcionista=\"" + value.recepcionista["nombre"] + "\"" +
 					//"	th:data-fecharegistro=\"" + value.fechaRegistro + "\"" +
 					"	data-fechaatencion=\"" + value.fechaAtencion + "\"" +
-					"	data-pendiente=\"" + value.pendiente + "\">Modificar</button >" +
+					"	data-pendiente=\"" + value.pendiente + "\"><i class='fa-solid fa-pen'></button >" +
 					"</td >" +
 					"<td>" +
 					"	<button type=\"button\" class=\"btn btn-danger btneliminarcita\"" +
 					"		data-codcita=\"" + value.id + "\"" +
 					"		data-nomCliente=\"" + value.cliente["nombre"] + "\"" +
-					"		data-pendiente=\"" + value.pendiente + "\">Cancelar</button>" +
+					"		data-pendiente=\"" + value.pendiente + "\"><i class='fa-solid fa-trash-can'></button>" +
 
-					"</td>" +
-					"</tr>"
+					"</td>" +"</tr>"
 				)
 			})
 		}

@@ -77,7 +77,8 @@ public class CitaAdaptador  implements ICita{
 				recepRep.findById(cita.getIdRecepcionista()).get(),
 				cita.getFechaRegistro(),
 				cita.getFechaAtencion(),
-				cita.getPendiente()
+				cita.getPendiente(),
+				true
 				);
 		
 		
@@ -88,6 +89,9 @@ public class CitaAdaptador  implements ICita{
 
 	@Override
 	public void eliminarCita(Integer id) {
+		
+		
+		
 		citaRep.delete(CitaMapeador.mapDeDominioAEntidadJpa(
 				encontrarCitaPorId(id).get()));
 		

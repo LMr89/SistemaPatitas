@@ -38,12 +38,32 @@ public class HorarioJpa {
 	private VeterinarioJpa idVet;
 	
 	@Temporal(TemporalType.TIME)
-	@Column(name = "hora_inicio")
-	private Date fechaInicio;
+	@Column(name = "man_inicio")
+	private Date manInicio;
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "man_fin")
+	private Date manFin;
+
+	@Temporal(TemporalType.TIME)
+	@Column(name = "tar_inicio")
+	private Date tarInicio;
+
 	
 	
 	@Temporal(TemporalType.TIME)
-	@Column(name = "hora_fin")
-	private Date fechaFin;
+	@Column(name = "tar_fin")
+	private Date tarFin;
 
+	@Override
+	public String toString() {
+		return "HorarioJpa{" +
+				"id=" + id +
+				", idVet=" + idVet +
+				", manInicio=" + manInicio +
+				", manFin=" + manFin +
+				", tarInicio=" + tarInicio +
+				", tarFin=" + tarFin +
+				'}';
+	}
 }

@@ -1,5 +1,6 @@
 package com.patitas.api.app.infraestructura.local.repositorio.entidades.cita;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -29,16 +30,24 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name = "cita")
-public class CitaJpa {
+public class CitaJpa implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cita")
 	private Integer idCita;
 	
+	@JsonBackReference(value = "cita-cliente")
 	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "idcliente")
 	private ClienteJpa idCliente;
 	
+	
+	@JsonBackReference(value = "cita-mascota")
 	@ManyToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "idmascota")
 	private MascotaJpa idMascota;
@@ -63,4 +72,21 @@ public class CitaJpa {
 	
 	@Column(name = "pendiente")
 	private Boolean pendiente;
+	
+	@Column(name = "estado")
+	private Boolean estado;
+
+	public CitaJpa(Integer idCita, ClienteJpa idCliente, MascotaJpa idMascota, VeterinarioJpa idVeterinario,
+			RecepcionistaJpa idRecepcionista, Calendar fechaRegistro, Calendar fechaAtencion, Boolean pendiente) {
+		this.idCita = idCita;
+		this.idCliente = idCliente;
+		this.idMascota = idMascota;
+		this.idVeterinario = idVeterinario;
+		this.idRecepcionista = idRecepcionista;
+		this.fechaRegistro = fechaRegistro;
+		this.fechaAtencion = fechaAtencion;
+		this.pendiente = pendiente;
+	}
+	
+	
 }

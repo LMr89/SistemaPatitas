@@ -18,5 +18,7 @@ public class CitaPeticion {
 	private Calendar fechaRegistro;
 	private Calendar fechaAtencion;
 	private Boolean pendiente;
+	private Boolean estado;
+
 
 }

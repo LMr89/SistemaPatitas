@@ -11,7 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Horario {
 	private Integer id;
-	private String fechaInicio;
-	private String fechaFin;
+	private String manInicio;
+	private String manFin;
+	private String tarInicio;
+	private String tarFin;
 
 }

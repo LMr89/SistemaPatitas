@@ -3,6 +3,8 @@ package com.patitas.api.app.api.controladores.archMaestros;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +23,15 @@ import com.patitas.api.app.infraestructura.local.adaptadores.archMaestros.Usuari
 
 @RestController
 @RequestMapping("/api/usuario")
+
 public class UsuarioController {
+	private static Logger log  = LogManager.getLogger(UsuarioController.class);
 	@Autowired
 	private UsuarioAdaptador usuarioAdapter;
 	
 	@GetMapping("/listar")
 	public ResponseEntity< List<Usuario>> listarUsuario() {
+
 		
 		return ResponseEntity.ok(usuarioAdapter.listarUsuarios());
 	}

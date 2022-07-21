@@ -1,6 +1,7 @@
 package com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -40,6 +43,10 @@ public class HistoriaClinicaJpa implements Serializable{
 	@JoinColumn(name = "idmascota")
 	private MascotaJpa idMascota;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "fecha_creacion")
+	private Calendar fechaCreacion;
+	
 	@Column(name = "estado")
 	private Boolean Estado;
 	
@@ -47,6 +54,7 @@ public class HistoriaClinicaJpa implements Serializable{
 	@OneToMany(mappedBy = "idHis", cascade = CascadeType.ALL)
 	private List<DiagnosticoJpa> listaDiagnosticos;
 
+	
 	public HistoriaClinicaJpa() {
 	}
 
@@ -55,6 +63,15 @@ public class HistoriaClinicaJpa implements Serializable{
 		this.idMascota = idMascota;
 		Estado = estado;
 	}
+
+	public HistoriaClinicaJpa(Integer id, MascotaJpa idMascota, Calendar fechaCreacion, Boolean estado) {
+		this.id = id;
+		this.idMascota = idMascota;
+		this.fechaCreacion = fechaCreacion;
+		Estado = estado;
+	}
+	
+	
 	
 	
 	

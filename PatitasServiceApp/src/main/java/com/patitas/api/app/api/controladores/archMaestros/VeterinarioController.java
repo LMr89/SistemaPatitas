@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.patitas.api.app.dominio.entidades.archMaestro.Veterinario;
 import com.patitas.api.app.dominio.modelo.respuesta.archMaestros.VeterinarioRespuesta;
 import com.patitas.api.app.infraestructura.local.adaptadores.archMaestros.VeterinarioAdaptador;
+import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.UsuarioJpa;
 import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.VeterinarioJpa;
 import com.patitas.api.app.infraestructura.local.repositorio.repositorios.archMaestro.VeterinarioRep;
 
@@ -51,19 +53,21 @@ public class VeterinarioController {
 	}
 	
 	@GetMapping("/buscar/{id}")
-	public ResponseEntity<VeterinarioJpa> encontrarVeterinarioPorIdCliente(@PathVariable Integer id) {
+	public ResponseEntity<Integer> encontrarVeterinarioPorIdCliente(@PathVariable Integer id) {
 		try {
-			Optional<VeterinarioJpa>mascotaEncontrada = vetRep.findById(id);
+			Optional<VeterinarioJpa>veterinarioEncontrado = vetRep.findByIdUsu(new UsuarioJpa(id));
 			
-			if (mascotaEncontrada.isPresent()) {
-				return ResponseEntity.ok(mascotaEncontrada.get());
+			if (veterinarioEncontrado.isPresent()) {
+				return ResponseEntity.ok(veterinarioEncontrado.get().getId());
+			}else {
+				return new ResponseEntity<Integer>(0,HttpStatus.NOT_FOUND);
 			}
 		} catch (Exception e) {
 			return ResponseEntity.badRequest()
 					.header("Error", e.getMessage())
 					.body(null);
 		}
-		return null;
+	
 		
 	}
 

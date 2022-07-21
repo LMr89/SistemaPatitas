@@ -35,7 +35,8 @@ public class CitaMapeador {
 				RecepcionistaMapper.mapDeEntidadJpaADominio(citaJpa.getIdRecepcionista()),
 				citaJpa.getFechaRegistro(),
 				citaJpa.getFechaAtencion(),
-				citaJpa.getPendiente()
+				citaJpa.getPendiente(),
+				citaJpa.getEstado()
 				);
 	}
 	public static CitaRespuesta mapDeDominioACitaRespuesta(Cita cita) {

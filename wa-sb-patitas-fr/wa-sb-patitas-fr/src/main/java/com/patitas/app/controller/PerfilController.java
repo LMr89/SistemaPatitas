@@ -15,6 +15,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/PerfilUsuario")
 public class PerfilController {
+	
     @GetMapping("/obtenerPerfil")
     @ResponseBody
     public PerfilUsuario obtenerPerfil(@RequestParam("idUsuario") Integer id) throws IOException {

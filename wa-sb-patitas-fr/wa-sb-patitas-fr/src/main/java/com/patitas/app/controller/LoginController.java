@@ -32,6 +32,7 @@ public class LoginController {
 			if(respuesta.getEsAutenticado() != false) {
 				model.addAttribute("mensaje",respuesta.getMensaje());
 				
+				
 				return "patitas/home";
 			}
 			else {

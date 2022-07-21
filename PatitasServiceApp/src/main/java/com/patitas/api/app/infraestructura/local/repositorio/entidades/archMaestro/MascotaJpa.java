@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.patitas.api.app.infraestructura.local.repositorio.entidades.cita.CitaJpa;
 
 import lombok.Data;
 
@@ -77,6 +78,11 @@ public class MascotaJpa {
 	@JsonManagedReference(value = "historia-mascota")
 	@OneToMany(mappedBy = "idMascota",  cascade = CascadeType.ALL)
 	public List<HistoriaClinicaJpa> lstMascotas;
+	
+	@JsonManagedReference(value = "cita-mascota")
+	@OneToMany(mappedBy = "idMascota",  cascade = CascadeType.ALL)
+	public List<CitaJpa> lstCitas;
+	
 	
 
 }

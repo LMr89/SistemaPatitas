@@ -1,214 +1,219 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="patitas/layout::head">
-    <meta charset="UTF-8">
-    <title>Formulario de usuarios</title>
+<meta charset="UTF-8">
+<title>Formulario de usuarios</title>
 
 </head>
 
 <script th:src="@{/js/jsweb/Usuario/frmMantUsuario.js}"
-        type="text/javascript"></script>
+	type="text/javascript"></script>
 <body>
-<nav th:replace="patitas/layout::menu"></nav>
+	<nav th:replace="patitas/layout::menu"></nav>
 
-<div class="card">
-    <div class="card-header bg-dark text-white">Mantenimiento de
-        usuarios
-    </div>
-    <div class="card-body">
+	<div class="card">
+		<div class="card-header bg-dark text-white">Mantenimiento de
+			usuarios</div>
+		<div class="card-body">
 
-        <button type="button" class="btn btn-primary" id="btnagregarusuario">Registrar
-            usuario
-        </button>
-        <hr/>
-        <div id="mensaje"></div>
-        <table class="table" id="tblusuario">
-            <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellidos</th>
-                <th scope="col">DNI</th>
-                <th scope="col">Direccion</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Telefono</th>
-                <th scope="col">Estado</th>
+			<button type="button" class="btn btn-primary" id="btnagregarusuario">Registrar
+				usuario</button>
+			<hr />
+			<div id="mensaje"></div>
+			<table class="table" id="tblusuario">
+				<thead>
+					<tr>
+						<th scope="col">Id</th>
+						<th scope="col">Nombre</th>
+						<th scope="col">Apellidos</th>
+						<th scope="col">DNI</th>
+						<th scope="col">Direccion</th>
+						<th scope="col">Correo</th>
+						<th scope="col">Telefono</th>
+						<th scope="col">Estado</th>
 
-            </tr>
-            </thead>
-            <tbody>
+					</tr>
+				</thead>
+				<tbody>
 
-            <tr th:each="usuario :${listusuarios}">
-                <th th:text="${usuario.id}"></th>
-                <td th:text="${usuario.nombre}"></td>
-                <td th:text="${usuario.apellidos}"></td>
-                <td th:text="${usuario.dni}"></td>
-                <td th:text="${usuario.direccion}"></td>
-                <td th:text="${usuario.email}"></td>
-                <td th:text="${usuario.telefono}"></td>
-                <td th:text="${(usuario.estado)?'Activo' : 'Inactivo'}"></td>
-                <!--
+					<tr th:each="usuario :${listusuarios}">
+						<th th:text="${usuario.id}"></th>
+						<td th:text="${usuario.nombre}"></td>
+						<td th:text="${usuario.apellidos}"></td>
+						<td th:text="${usuario.dni}"></td>
+						<td th:text="${usuario.direccion}"></td>
+						<td th:text="${usuario.email}"></td>
+						<td th:text="${usuario.telefono}"></td>
+						<td th:text="${(usuario.estado)?'Activo' : 'Inactivo'}"></td>
+						<!--
                 <td>
                     <button type="button" class="btn btn-success btnVerCredenciales" >
                         <i class="fa-solid fa-eye"></i>
                     </button>
                 </td>-->
-                <td>
-                    <button type="button" class="btn btn-primary btnactualizarusuario"
-                            th:data-codusuario="${usuario.id}"
-                            th:data-nombre="${usuario.nombre}"
-                            th:data-apellidos="${usuario.apellidos}"
-                            th:data-dni="${usuario.dni}"
-                            th:data-direccion="${usuario.direccion}"
-                            th:data-correo="${usuario.email}"
-                            th:data-telefono="${usuario.telefono}"
-                            th:data-estado="${usuario.estado}"><i class="fa-solid fa-pen"></i>
-                    </button>
+						<td>
+							<button type="button"
+								class="btn btn-primary btnactualizarusuario"
+								th:data-codusuario="${usuario.id}"
+								th:data-nombre="${usuario.nombre}"
+								th:data-apellidos="${usuario.apellidos}"
+								th:data-dni="${usuario.dni}"
+								th:data-direccion="${usuario.direccion}"
+								th:data-correo="${usuario.email}"
+								th:data-telefono="${usuario.telefono}"
+								th:data-estado="${usuario.estado}">
+								<i class="fa-solid fa-pen"></i>
+							</button>
 
-                </td>
-                <td>
-                    <button type="button" class="btn btn-danger btneliminarusuario"
-                            th:data-codusuario="${usuario.id}"
-                            th:data-nombre="${usuario.nombre}"
-                            th:data-apellidos="${usuario.apellidos}"
-                            th:data-dni="${usuario.dni}"
-                            th:data-direccion="${usuario.direccion}"
-                            th:data-correo="${usuario.email}"
-                            th:data-telefono="${usuario.telefono}"
-                            th:data-estado="${usuario.estado}"><i class="fa-solid fa-trash-can"></i>
-                    </button>
+						</td>
+						<td>
+							<button type="button" class="btn btn-danger btneliminarusuario"
+								th:data-codusuario="${usuario.id}"
+								th:data-nombre="${usuario.nombre}"
+								th:data-apellidos="${usuario.apellidos}"
+								th:data-dni="${usuario.dni}"
+								th:data-direccion="${usuario.direccion}"
+								th:data-correo="${usuario.email}"
+								th:data-telefono="${usuario.telefono}"
+								th:data-estado="${usuario.estado}">
+								<i class="fa-solid fa-trash-can"></i>
+							</button>
 
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<!-- Modal Agregar Usuario -->
-<div class="modal fade" id="modalusuario" tabindex="-1"
-     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Registrar Usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- Modal Agregar Usuario -->
+	<div class="modal fade" id="modalusuario" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Registrar
+						Usuario</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
 
-                <div class="mb-3">
-                    <label for="txtnombre" class="form-label">Nombre del
-                        Usuario</label> <input type="text" class="form-control" id="txtnombre">
-                    <span id="errornombre" class="text-danger"></span>
-                </div>
+					<div class="mb-3">
+						<label for="txtnombre" class="form-label">Nombre del
+							Usuario</label> <input type="text" class="form-control" id="txtnombre">
+						<span id="errornombre" class="text-danger"></span>
+					</div>
 
-                <div class="mb-3">
-                    <label for="txtapellidos" class="form-label">Apellidos del Usuario
-                    </label> <input type="text" class="form-control" id="txtapellidos">
-                    <span id="errorapellidos" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="txtdni" class="form-label">DNI
-                    </label> <input type="number" class="form-control" id="txtdni">
-                    <span id="errordni" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="txtdireccion" class="form-label">Direccion
-                    </label> <input type="text" class="form-control" id="txtdireccion">
-                    <span id="errordireccion" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="txtcorreo" class="form-label">Correo
-                    </label> <input type="text" class="form-control" id="txtcorreo">
-                    <span id="errorcorreo" class="text-danger"></span>
-                </div>
-                <div class="mb-3">
-                    <label for="txttelefono" class="form-label">Telefono
-                    </label> <input type="number" class="form-control" id="txttelefono">
-                    <span id="errortelefono" class="text-danger"></span>
-                </div>
+					<div class="mb-3">
+						<label for="txtapellidos" class="form-label">Apellidos del
+							Usuario </label> <input type="text" class="form-control"
+							id="txtapellidos"> <span id="errorapellidos"
+							class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txtdni" class="form-label">DNI </label> <input
+							type="number" class="form-control" id="txtdni"> <span
+							id="errordni" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txtdireccion" class="form-label">Direccion </label> <input
+							type="text" class="form-control" id="txtdireccion"> <span
+							id="errordireccion" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txtcorreo" class="form-label">Correo </label> <input
+							type="text" class="form-control" id="txtcorreo"> <span
+							id="errorcorreo" class="text-danger"></span>
+					</div>
+					<div class="mb-3">
+						<label for="txttelefono" class="form-label">Telefono </label> <input
+							type="number" class="form-control" id="txttelefono"> <span
+							id="errortelefono" class="text-danger"></span>
+					</div>
 
-                <input type="hidden" id="hddidusuario">
-
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                        data-bs-dismiss="modal">Cerrar
-                </button>
-                <button type="button" class="btn btn-primary" id="btnregistrarusuario">Guardar</button>
-            </div>
-        </div>
-    </div>
-</div>
+					<input type="hidden" id="hddidusuario">
 
 
-<!-- Modal Para modificar un usuario -->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary"
+						id="btnregistrarusuario">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<div class="modal fade" id="modalActualizar" tabindex="-1"
-     aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="lblReg">Modificar Usuario</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="mb-3">
-                                <label for="txtActNombre" class="form-label">Nombre del
-                                    Usuario</label> <input type="text" class="form-control" id="txtActNombre">
-                                <span id="errorActnombre" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <input type="hidden" id="hddidusuarioeliminar">
-                        <div class="col-4">
-                            <div class="mb-3">
-                                <label for="txtActApellidos" class="form-label">Apellidos del Usuario
-                                </label> <input type="text" class="form-control" id="txtActApellidos">
-                                <span id="errorActapellidos" class="text-danger"></span>
-                            </div>
-                        </div>
 
-                        <div class="col-4">
-                            <div class="mb-3">
-                                <label for="txtActDni" class="form-label">DNI
-                                </label> <input type="number" class="form-control" id="txtActDni">
-                                <span id="errorActdni" class="text-danger"></span>
-                            </div>
-                        </div>
+	<!-- Modal Para modificar un usuario -->
 
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="mb-3">
-                                <label for="txtActDireccion" class="form-label">Direccion
-                                </label> <input type="text" class="form-control" id="txtActDireccion">
-                                <span id="errorActdireccion" class="text-danger"></span>
-                            </div>
-                        </div>
+	<div class="modal fade" id="modalActualizar" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="lblReg">Modificar Usuario</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="container">
+						<div class="row">
+							<div class="col-4">
+								<div class="mb-3">
+									<label for="txtActNombre" class="form-label">Nombre del
+										Usuario</label> <input type="text" class="form-control"
+										id="txtActNombre"> <span id="errorActnombre"
+										class="text-danger"></span>
+								</div>
+							</div>
+							<input type="hidden" id="hddidusuarioeliminar">
+							<div class="col-4">
+								<div class="mb-3">
+									<label for="txtActApellidos" class="form-label">Apellidos
+										del Usuario </label> <input type="text" class="form-control"
+										id="txtActApellidos"> <span id="errorActapellidos"
+										class="text-danger"></span>
+								</div>
+							</div>
 
-                        <div class="col-4">
-                            <div class="mb-3">
-                                <label for="txtActCorreo" class="form-label">Correo
-                                </label> <input type="text" class="form-control" id="txtActCorreo">
-                                <span id="errorActcorreo" class="text-danger"></span>
-                            </div>
-                        </div>
+							<div class="col-4">
+								<div class="mb-3">
+									<label for="txtActDni" class="form-label">DNI </label> <input
+										type="number" class="form-control" id="txtActDni"> <span
+										id="errorActdni" class="text-danger"></span>
+								</div>
+							</div>
 
-                        <div class="col-4">
-                            <div class="mb-3">
-                                <label for="txtActTelefono" class="form-label">Telefono
-                                </label> <input type="number" class="form-control" id="txtActTelefono">
-                                <span id="errorActtelefono" class="text-danger"></span>
-                            </div>
-                        </div>
+						</div>
+						<div class="row">
+							<div class="col-4">
+								<div class="mb-3">
+									<label for="txtActDireccion" class="form-label">Direccion
+									</label> <input type="text" class="form-control" id="txtActDireccion">
+									<span id="errorActdireccion" class="text-danger"></span>
+								</div>
+							</div>
 
-                    </div>
-                    <!--
+							<div class="col-4">
+								<div class="mb-3">
+									<label for="txtActCorreo" class="form-label">Correo </label> <input
+										type="text" class="form-control" id="txtActCorreo"> <span
+										id="errorActcorreo" class="text-danger"></span>
+								</div>
+							</div>
+
+							<div class="col-4">
+								<div class="mb-3">
+									<label for="txtActTelefono" class="form-label">Telefono
+									</label> <input type="number" class="form-control" id="txtActTelefono">
+									<span id="errorActtelefono" class="text-danger"></span>
+								</div>
+							</div>
+
+						</div>
+						<!--
                     <div class="row justify-content-center">
                         <div class="col-3">
                             <div class="mb-3">
@@ -224,68 +229,113 @@
                         </div>
 
                     </div>-->
-                    <hr>
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label for="txtActUsuario" class="form-label">Usuario del sistema
-                                </label> <input type="text" class="form-control" id="txtActUsuario">
-                                <span id="errorUsuario" class="text-danger"></span>
-                            </div>
-                            <input type="hidden" id="idPerfil">
-                        </div>
+						<hr>
+						<div class="row">
+							<div class="col-6">
+								<div class="mb-3">
+									<label for="txtActUsuario" class="form-label">Usuario
+										del sistema </label> <input type="text" class="form-control"
+										id="txtActUsuario"> <span id="errorUsuario"
+										class="text-danger"></span>
+								</div>
+								<input type="hidden" id="idPerfil">
+							</div>
 
-                        <div class="col-6">
-                            <div class="mb-3">
-                                <label for="txtActContrasenia" class="form-label">Contraseña
-                                </label> <input type="text" class="form-control" id="txtActContrasenia">
-                                <span id="errorContrasenia" class="text-danger"></span>
-                            </div>
-                        </div>
+							<div class="col-6">
+								<div class="mb-3">
+									<label for="txtActContrasenia" class="form-label">Contraseña
+									</label> <input type="text" class="form-control" id="txtActContrasenia">
+									<span id="errorContrasenia" class="text-danger"></span>
+								</div>
+							</div>
 
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-3">
-                            <div class="mb-3">
-                                <label for="txttelefono"  class="form-label">Accesos</label>
-                                    <select id="cboAccesos" class="form-select" aria-label="Default select example">
-                                        <option value="0" >Seleccione un perfil</option>
-                                        <option value="1" >Administrador</option>
-                                        <option value="2">Recepcionista</option>
-                                        <option value="3">Veterinario</option>
-                                    </select>
-                                    <span id="errorAcceso" class="text-danger"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row justify-content-center">
-                        <div class="col-3">
-                            <button class="btn btn-success" id="btnGuardarCambios">
-                                <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios
-                            </button>
-                        </div>
+						</div>
+						<div class="row justify-content-center">
+							<div class="col-3">
+								<div class="mb-3">
+									<label for="txttelefono" class="form-label">Accesos</label> <select
+										id="cboAccesos" class="form-select"
+										aria-label="Default select example">
+										<option value="0">Seleccione un perfil</option>
+										<option value="1">Administrador</option>
+										<option value="2">Recepcionista</option>
+										<option value="3">Veterinario</option>
+									</select> <span id="errorAcceso" class="text-danger"></span>
+								</div>
+							</div>
+						</div>
+						<div class="row justify-content-center border border-secondary"
+							id="formHorario">
+							<label  class="form-label text-center">Horario</label>
+							<div class="container-xxl">
+								<div class="row justify-content-center">
 
-                        <div class="col-3">
-                            <button class="btn btn-danger" id="btnCancelar">
-                                <i class="fa-solid fa-ban"></i> Cancelar
-                            </button>
-                        </div>
-                    </div>
+									<div class="col-md-auto">
+										<div class="mb-3">
+											<label class="form-label me-2">Mañana</label> <input
+												type="time" id="hManInicio" value="08:00">
+										</div>
+
+									</div>
+									<div class="col-md-auto">
+										<div class="mb-3">
+											<input type="time" id="hManFin" value="12:00">
+										</div>
+									</div>
+								</div>
+								<div class="row justify-content-center">
+
+									<div class="col-md-auto">
+										<div class="mb-3">
+											<label class="form-label me-2">Tarde</label> <input
+												type="time" id="hTarInicio" value="14:00">
+										</div>
+
+									</div>
+									<div class="col-md-auto">
+										<div class="mb-3">
+											<input type="time" id="hTarFin" value="15:30">
+										</div>
+									</div>
+									<input type="hidden" id="idVeterinario">
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+					<hr>
+					<div class="row justify-content-center">
+						<div class="col-3">
+							<button class="btn btn-success" id="btnGuardarCambios">
+								<i class="fa-solid fa-floppy-disk"></i> Guardar Cambios
+							</button>
+						</div>
+
+						<div class="col-3">
+							<button class="btn btn-danger" id="btnCancelar">
+								<i class="fa-solid fa-ban"></i> Cancelar
+							</button>
+						</div>
+					</div>
 
 
-                </div>
-            </div>
+				</div>
+			</div>
 
-        </div>
-    </div>
-</div>
+		</div>
+	</div>
+	</div>
 
 
-<script src="/js/jquery/jquery-3.6.0.min.js" type="text/javascript"></script>
-<script src="https://kit.fontawesome.com/f14f6892b8.js" crossorigin="anonymous"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="/js/jsweb/Usuario/frmMantUsuario.js" type="text/javascript"></script>
+	<script src="/js/jquery/jquery-3.6.0.min.js" type="text/javascript"></script>
+	<script src="https://kit.fontawesome.com/f14f6892b8.js"
+		crossorigin="anonymous"></script>
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="/js/jsweb/Usuario/frmMantUsuario.js"
+		type="text/javascript"></script>
 
 </body>
 </html>

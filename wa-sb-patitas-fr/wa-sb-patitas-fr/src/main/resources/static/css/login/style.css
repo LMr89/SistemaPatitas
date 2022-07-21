@@ -4,6 +4,12 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+ 
+ body{
+ 	background: rgb(238,174,202);
+	background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 71%, rgba(163,185,228,1) 83%);
+ }
+ 
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -57,7 +63,8 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff; }
+ background: rgb(238,174,202) !important;
+	background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 71%, rgba(163,185,228,1) 83%) !important;}
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }

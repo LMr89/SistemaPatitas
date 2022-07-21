@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.patitas.app.controller.response.ResultadoResponse;
@@ -79,6 +80,16 @@ public class VeterinarioController {
 	@ResponseBody
 	public List<Veterinario> listarVeterinarios() throws IOException{
 		return VeterinarioHttp.listarVeterinarios();
+	}
+	
+	/*Este metod servira para obtener el id del veterinario por id del veterinario*/
+	
+	@GetMapping("/obtener-idVet")
+	@ResponseBody
+	public Integer obtenerIdVet(@RequestParam("idUsuario") Integer idUsuario) throws IOException{
+		Integer idVet =  VeterinarioHttp.obtenerIdVeterinarioPorIdCliente(idUsuario);
+		
+		return idVet;
 	}
 	
 

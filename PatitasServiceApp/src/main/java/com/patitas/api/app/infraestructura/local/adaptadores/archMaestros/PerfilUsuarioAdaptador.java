@@ -2,6 +2,8 @@ package com.patitas.api.app.infraestructura.local.adaptadores.archMaestros;
 
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import com.patitas.api.app.infraestructura.mapeadores.archMaestros.UsuarioMapper
 
 @Service
 public class PerfilUsuarioAdaptador implements IPerfilUsuario {
+	private static Logger log = LogManager.getLogger(PerfilUsuarioAdaptador.class);
 	@Autowired
 	private PerfilUsuarioRep perfilRep;
 
@@ -54,7 +57,7 @@ public class PerfilUsuarioAdaptador implements IPerfilUsuario {
 						UsuarioMapper.mapDeEntidadJpaADominio(usuarioRep.findById(perf.getIdUsuario()).get()), true));
 
 			default:
-				System.out.println("Hubo un error");
+				log.warn("IdAcceso no esta en el rango 1-2-3");;
 				break;
 			}
 		} catch (Exception e) {

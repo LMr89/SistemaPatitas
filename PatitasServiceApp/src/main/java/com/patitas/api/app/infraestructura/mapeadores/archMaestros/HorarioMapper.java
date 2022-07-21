@@ -9,8 +9,10 @@ public class HorarioMapper {
 		return new HorarioJpa(
 				horario.getIdHora(),
 				VeterinarioMapper.mapDeDominioAEntidadJpa(horario.getIdVet()),
-				horario.getHoraInicio(),
-				horario.getHoraFin()
+				horario.getManInicio(),
+				horario.getManFin(),
+				horario.getTarInicio(),
+				horario.getTarFin()
 			
 				);
 	}
@@ -19,8 +21,10 @@ public class HorarioMapper {
 		return new Horario(
 				horarioJpa.getId(),
 				VeterinarioMapper.mapDeEntidadJpaADominio(horarioJpa.getIdVet()),
-				horarioJpa.getFechaInicio(),
-				horarioJpa.getFechaFin()
+				horarioJpa.getManInicio(),
+				horarioJpa.getManFin(),
+				horarioJpa.getTarInicio(),
+				horarioJpa.getTarFin()
 				
 				);
 	

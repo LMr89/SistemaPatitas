@@ -44,8 +44,8 @@ public class CitaHttp {
 	    	    		+ "\"idRecepcionista\":\""+cit.getRecepcionista().get("idRecepcionista")+"\",\r\n"
 	    	    		+ "\"fechaRegistro\":\""+CitaHttp.parsearCalendarAString(cit.getFechaRegistro())+"\",\r\n"
 	    	    		+ "\"fechaAtencion\":\""+CitaHttp.parsearCalendarAString(cit.getFechaAtencion())+"\",\r\n"
-	    	    		+ "\"pendiente\":\""+cit.getPendiente()+"\"\r\n}");
-	    	    
+	    	    		+ "\"pendiente\":\""+cit.getPendiente()+"\" \r\n}");
+
 	    	    
 	    	    System.out.println(cit.getCliente().get("id") + " " +cit.getMascota().get("idMascota") );
 	    	    Request request = new Request.Builder()
