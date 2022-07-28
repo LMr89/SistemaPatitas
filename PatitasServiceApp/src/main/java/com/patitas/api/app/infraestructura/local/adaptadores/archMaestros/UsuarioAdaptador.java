@@ -22,6 +22,7 @@ public class UsuarioAdaptador  implements IUsuario{
 	@Autowired 
 	private PerfilUsuarioAdaptador perfilUsuarioAdaptador;
 
+
 	@Override
 	public List<Usuario> listarUsuarios() {
 		
@@ -61,12 +62,14 @@ public class UsuarioAdaptador  implements IUsuario{
 		
 		//Se elimina el registro de la tabla Perfil Usuario
 		actualizarUsuario(UsuarioMapper.mapDeEntidadJpaADominio(encontrado));
-		perfilUsuarioAdaptador.eliminarPerfil(id); 
+		perfilUsuarioAdaptador.eliminarPerfil(id);
 
 
-		//usuarioRep.delete());
 		
 	}
+
+
+
 
 	
 }

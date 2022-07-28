@@ -1,10 +1,7 @@
 package com.patitas.api.app.infraestructura.local.adaptadores.archMaestros;
 
 
-import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
-
 import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.VeterinarioJpa;
 import org.apache.logging.log4j.*;
 import org.hibernate.exception.ConstraintViolationException;
@@ -37,14 +34,20 @@ public class HorarioAdaptador {
 		if (encontrado.isPresent()){
 			return  encontrado.get();
 		}else{
-			return  new HorarioJpa();
+			return  null;
 		}
 	}
 
 	@SuppressWarnings("deprecation")
-	public Boolean registrarHorario(HorarioPeticion peticion) throws ConstraintViolationException {
+	public Boolean registrarHorario(HorarioPeticion peticion) throws Exception {
 		Boolean creado = false;
 		try {
+			/*En si lo que me manda es el id del usuario lo que se hara
+			* es usar el repositorio para encontrar el id del veterinario
+			* ya registrado para recien ya registrar el horario*/
+			//VeterinarioJpa veter =
+			//		veterinarioRep.findByIdUsu(new UsuarioJpa(peticion.getIdVeterinario())).get();
+			// idVeterinarioEncontrado = veter.getId();
 			horarioRep.registrarHorario(peticion.getIdVeterinario(),
 					peticion.getManInicio().getHours()+":"+ peticion.getManInicio().getMinutes(),
 					peticion.getManFin().getHours()+":"+ peticion.getManFin().getMinutes(),
@@ -54,7 +57,7 @@ public class HorarioAdaptador {
 			creado = true;
 			
 		} catch (ConstraintViolationException e) {
-			log.error("Hubo un error en el horario adaptador:  "+ e.getCause());
+			log.warn("Id repetido");
 		}
 		return creado;
 	}
@@ -65,17 +68,16 @@ public class HorarioAdaptador {
 		Boolean actualizado = false;
 
 		try {
-			Optional<HorarioJpa> encontrado = Optional.of(obtenerHorarioDeUsuarioVet(peticion.getIdVeterinario()));
 
-			if (encontrado.isPresent()){
-				encontrado.get().setManInicio(peticion.getManInicio());
-				encontrado.get().setManFin(peticion.getManFin());
-				encontrado.get().setTarInicio(peticion.getTarInicio());
-				encontrado.get().setTarFin(peticion.getTarFin());
-
-				horarioRep.save(encontrado.get());
+			horarioRep.actualizarHorario(
+					peticion.getIdVeterinario(),
+					peticion.getManInicio().getHours()+":"+ peticion.getManInicio().getMinutes(),
+					peticion.getManFin().getHours()+":"+ peticion.getManFin().getMinutes(),
+					peticion.getTarInicio().getHours()+":"+ peticion.getTarInicio().getMinutes(),
+					peticion.getTarFin().getHours()+":"+ peticion.getTarFin().getMinutes()
+			);
 				actualizado = true;
-			}
+
 			
 		} catch (Exception e) {
 			log.error("Error en actualizar 'Horario Adaptador': " + e.getMessage());

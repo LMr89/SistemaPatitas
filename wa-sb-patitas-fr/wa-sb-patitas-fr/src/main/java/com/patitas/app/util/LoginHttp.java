@@ -1,13 +1,7 @@
 package com.patitas.app.util;
 
 import java.io.IOException;
-import java.util.*;
-import java.util.List;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.patitas.app.model.entity.Cliente;
 import com.patitas.app.model.request.LoginRequest;
 import com.patitas.app.model.response.LoginResponse;
 
@@ -16,7 +10,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 public class LoginHttp {
 

@@ -1,14 +1,11 @@
 package com.patitas.app.util;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.patitas.app.model.entity.PerfilUsuario;
-import com.patitas.app.model.entity.Usuario;
 import com.patitas.app.model.request.PerfilRequest;
 import okhttp3.*;
 
 import java.io.IOException;
-import java.util.List;
 
 public class PerfilHttp {
     public static PerfilUsuario obtenerPerfil(Integer id) throws IOException {

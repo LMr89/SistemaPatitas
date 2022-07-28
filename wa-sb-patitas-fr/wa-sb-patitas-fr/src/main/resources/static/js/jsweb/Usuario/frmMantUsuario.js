@@ -1,14 +1,4 @@
-$(document).on("click", "#btnagregarusuario", function() {
-	$("#txtnombre").val("");
-	$("#txtapellidos").val("");
-	$("#txtdni").val("");
-	$("#txtdireccion").val("");
-	$("#txtcorreo").val("");
-	$("#txttelefono").val("");
-	$("#txtestado").val("");
-	$("#hddidusuario").val("0");
-	$("#modalusuario").modal("show");
-});
+var veterinarioTieneHorario = false;
 
 $("#cboAccesos").change(function() {
 	if ($("#cboAccesos").val() === "3") {
@@ -22,7 +12,19 @@ $("#hManInicio").change(function() {
 	alert($("#hManInicio").val())
 })
 
-const campos = {
+$(document).on("click", "#btnagregarusuario", function() {
+	$("#txtnombre").val("");
+	$("#txtapellidos").val("");
+	$("#txtdni").val("");
+	$("#txtdireccion").val("");
+	$("#txtcorreo").val("");
+	$("#txttelefono").val("");
+	$("#txtestado").val("");
+	$("#hddidusuario").val("0");
+	$("#modalusuario").modal("show");
+});
+
+var campo = {
 	nombre : false,
 	apellidos : false ,
 	dni : false,
@@ -31,73 +33,74 @@ const campos = {
 	telefono : false,
 	estado : false
 };
-
 function validarModal() {
 
-	regexValidarEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+	let regexValidarEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 	if ($("#txtnombre").val() === "") {
 		$("#errornombre").text("Es obligarotio ingresar el nombre del usuario");
+
+		campo['nombre']  = false;
 	} else {
 		$("#errornombre").text("");
-		campos['nombre']  = true;
+		campo['nombre']  = true;
+	
 	}
 
 	if ($("#txtapellidos").val() === "") {
 		$("#errorapellidos").text("Es obligarotio ingresar el apellido del usuario");
-
+		campo['apellidos']  = false;
 	} else {
 		$("#errorapellidos").text("");
-		campos['apellidos']  = true;
+		campo['apellidos']  = true;
 	}
 	if ($("#txtdni").val() === "" || $("#txtdni").val().length != 8) {
 		$("#errordni").text("Es obligarotio ingresar un DNI valido");
+		campo['dni']  = false;
 
 	} else {
 		$("#errordni").text("");
-		campos['dni']  = true;
+		campo['dni']  = true;
 	}
 	if ($("#txtdireccion").val() === "") {
 		$("#errordireccion").text("Es obligarotio ingresar la direccion del usuario");
-
+		campo['direccion']  = false;
 	} else {
 		$("#errordireccion").text("");
-		campos['direccion']  = true;
+		campo['direccion']  = true;
 	}
 	if ($("#txtcorreo").val() === "" || regexValidarEmail.test($("#txtcorreo").val()) == false) {
 		$("#errorcorreo").text("Es obligarotio ingresar un correo valido");
-
+		campo['correo']  = false;
 	} else {
 		$("#errorcorreo").text("");
-		campos['correo']  = true;
+		campo['correo']  = true;
 	}
 	if ($("#txttelefono").val() === "" || $("#txttelefono").val().length != 9) {
 		$("#errortelefono").text("Es obligarotio ingresar el telefono valido");
-
+		campo['telefono']  = false;
 	} else {
 		$("#errortelefono").text("");
-		campos['telefono']  = true;
+		campo['telefono']  = true;
 	}
 	if ($("#txtestado").val() === "") {
 		$("#errorestado").text("Es obligarotio ingresar el estado del usuario");
-;
+		campo['estado']  = false;
 	} else {
 		$("#errorestado").text("");
-		campos['estado']  = true;
+		campo['estado']  = true;
 	}
 
-	if (campos.nombre && campos.apellidos && campos.dni &&
-			campos.direccion && campos.correo && campos.telefono && campos.estado){
+	if (campo.nombre && campo.apellidos && campo.dni &&
+			campo.direccion && campo.correo && campo.telefono && campo.estado){
 		return true;
 	}else{
 		return false;
 	}
-
-
-
 }
 
-const campos_actualizar = {
+
+var campAct = {
 	nombre : false,
 	apellidos : false ,
 	dni : false,
@@ -109,92 +112,94 @@ const campos_actualizar = {
 	password : false,
 	acceso : false
 };
-
 function validarModalParaActualizar() {
 
-	regexValidarEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+	let regexValidarEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
 	if ($("#txtActNombre").val() === "") {
 		$("#errorActnombre").text("Es obligarotio ingresar el nombre del usuario");
-
+		campAct['nombre'] = false;
 	} else {
 		$("#errorActnombre").text("");
-		campos_actualizar['nombre'] = true;
+		campAct['nombre'] = true;
 	}
 
 	if ($("#txtActApellidos").val() === "") {
 		$("#errorActapellidos").text("Es obligarotio ingresar el apellido del usuario");
-
+		campAct['apellidos'] = false;
 	} else {
 		$("#errorActapellidos").text("");
-		campos_actualizar['apellidos'] = true;
+		campAct['apellidos'] = true;
 	}
 	if ($("#txtActDni").val() === "" || $("#txtActDni").val().length != 8) {
 		$("#errorActdni").text("Es obligarotio ingresar un DNI valido");
-
+		campAct['dni'] = false;
 	} else {
 		$("#errorActdni").text("");
-		campos_actualizar['dni'] = true;
+		campAct['dni'] = true;
 
 	}
 
 	if ($("#txtActDireccion").val() === "") {
 		$("#errorActdireccion").text("Es obligarotio ingresar la direccion del usuario");
-
+		campAct['direccion'] = false;
 	} else {
 		$("#errorActdireccion").text("");
-		campos_actualizar['direccion'] = true;
+		campAct['direccion'] = true;
 	}
 	if ($("#txtActCorreo").val() === "" || regexValidarEmail.test($("#txtActCorreo").val()) == false) {
 		$("#errorActcorreo").text("Es obligarotio ingresar un correo valido");
-
+		campAct['correo'] = false;
 	} else {
 		$("#errorActcorreo").text("");
-		campos_actualizar['correo'] = true;
+		campAct['correo'] = true;
 	}
 	if ($("#txtActTelefono").val() === "" || $("#txtActTelefono").val().length != 9) {
 		$("#errorActtelefono").text("Es obligarotio ingresar el telefono valido");
-
+		campAct['telefono'] = false;
 	} else {
 		$("#errorActtelefono").text("");
-		campos_actualizar['telefono'] = true;
+		campAct['telefono'] = true;
 	}
 	if ($("#txtActEstado").val() === "") {
 		$("#errorEstado").text("Es obligarotio ingresar el estado del usuario");
-
+		campAct['estado'] = false;
 	} else {
 		$("#errorEstado").text("");
-		campos_actualizar['estado'] = true;
+		campAct['estado'] = true;
 	}
 
 	if ($("#txtActUsuario").val() === "") {
 		$("#errorUsuario").text("Es obligarotio ingresar un nombre");
 		ok = false;
+		campAct['username'] = false;
 	} else {
 		$("#errorUsuario").text("");
-		campos_actualizar['username'] = true;
+		campAct['username'] = true;
 	}
 
 	if ($("#txtActContrasenia").val() === "") {
 		$("#errorContrasenia").text("Es obligarotio ingresar  una contraseña");
+		campAct['password'] = false;
 
 	} else {
 		$("#errorContrasenia").text("");
-		campos_actualizar['password'] = true;
+		campAct['password'] = true;
 	}
 
 
 	if ($("#cboAccesos").val() === '0') {
 		$("#errorAcceso").text("Es obligatorio escoger un perfil ");
+		campAct['acceso'] = false;
 
 	} else {
 		$("#errorAcceso").text("");
-		campos_actualizar['acceso'] = true;
+		campAct['acceso'] = true;
 	}
 
-	if (campos.nombre && campos.apellidos && campos.dni &&
-		campos.direccion && campos.correo && campos.telefono && campos.estado
-		&& campos.username && campos.password && campos.acceso){
+	if (campAct.nombre && campAct.apellidos && campAct.dni &&
+		campAct.direccion && campAct.correo && campAct.telefono && campAct.estado
+		&& campAct.username && campAct.password && campAct.acceso){
 		return true;
 	}else{
 		return false;
@@ -220,8 +225,30 @@ $(document).on("click", "#btnregistrarusuario", function() {
 				}),
 				success: function(resultado) {
 					if (resultado.respuesta) {
-						alertNotificadora(resultado.mensaje, "success")
+						//alertNotificadora(resultado.mensaje, "success")
 						listarUsuarios();
+						/*Alerta que le informara al usuario que debe asignarle nuevos permisos
+						* al usuario creado*/
+
+						Swal.fire({
+							//position: 'top-end',
+							icon: 'success',
+							title: resultado.respuesta,
+							showConfirmButton: false,
+							timer: 3500,
+							didClose : ()=>{
+								Swal.fire({
+									title: "Siguiente paso",
+									html: 'Ahora que ya has creado un nuevo usuario <br> configura sus credenciales y accesos. <br> CLickea el boton  <i class=\"fa-solid fa-pen\"></i> ',
+									icon: "warning",
+									button: "Entendido",
+								});
+							}
+						})
+
+
+
+
 					} else {
 						alertNotificadora(resultado.mensaje, "error" +
 							"")
@@ -279,14 +306,17 @@ $(document).on("click", "#btnGuardarCambios", function() {
 					} else {
 
 						if (actualizarPerfil($("#hddidusuario").val(), document.getElementById("cboAccesos").selectedIndex) == true) {
+							if (document.getElementById("cboAccesos").selectedIndex == 3) {
 
-							setTimeout(function() {
-								if (document.getElementById("cboAccesos").selectedIndex == 3) {
+								/*Si el veterinario no tiene horario se crea 1 sino se le actualiza*/
+								if (veterinarioTieneHorario == false){
 									registrarHorario()
+									veterinarioTieneHorario = false;
+								}else{
+									//Actualizacion del horario
+									actualizarHorario();
 								}
-							}, 2000);
-
-
+							}
 							alertNotificadora(resultado.mensaje, "success")
 							listarUsuarios();
 
@@ -309,6 +339,26 @@ $(document).on("click", "#btnGuardarCambios", function() {
 
 })
 
+function usuarioTieneHorario(){
+	$.ajax({
+		type: "GET",
+		contentType: "application/json",
+		url: "/horario/existe-horario",
+		data: {idUsu : $("#hddidusuario").val() },
+		success: function(resultado) {
+			if (resultado.respuesta) {
+				veterinarioTieneHorario = true;
+				alert("Existe un horario: " + veterinarioTieneHorario);
+
+			}else{
+				alert(resultado.mensaje)
+
+			}
+
+		}
+	});
+}
+
 function actualizarPerfil(idUsuario, cboAccesoIndice) {
 	var actualizado = true;
 	$.ajax({
@@ -329,9 +379,9 @@ function actualizarPerfil(idUsuario, cboAccesoIndice) {
 
 			}
 			//Chequear este condicional
-			/*else {
+			else {
 				console.log("Actualiza Perfil: " + resultado.mensaje);
-			}*/
+			}
 		}
 	});
 
@@ -365,18 +415,6 @@ function crearPerfil(idUsuario, cboAccesoIndice) {
 
 }
 
-$(document).on("click", "#btnagregarusuario", function() {
-	$("#txtnombre").val("");
-	$("#txtapellidos").val("");
-	$("#txtdni").val("");
-	$("#txtdireccion").val("");
-	$("#txtcorreo").val("");
-	$("#txttelefono").val("");
-	$("#txtestado").val("");
-	$("#hddidusuario").val("0");
-	$("#modalusuario").modal("show");
-});
-
 $(document).on("click", ".btnactualizarusuario", function() {
 	$("#txtActNombre").val($(this).attr("data-nombre"));
 	$("#txtActApellidos").val($(this).attr("data-apellidos"));
@@ -387,10 +425,13 @@ $(document).on("click", ".btnactualizarusuario", function() {
 	$("#txtActEstado").val($(this).attr("data-estado"));
 	$("#hddidusuario").val($(this).attr("data-codusuario"));
 
+	usuarioTieneHorario();
+
 	//Setear el combo box
 	//$("#cboEstados").val((String($("#txtActEstado").val()) == "true" ? "1" : "0"))
 	obtenerPerfilUsuario();
 	$("#modalActualizar").modal("show");
+
 });
 
 $(document).on("click", ".btneliminarusuario", function() {
@@ -550,7 +591,7 @@ function registrarHorario() {
 		/*Registrar el horario del usuario*/
 		$.ajax({
 			type: "POST",
-			url: "/Usuario/registrar-horario",
+			url: "/horario/registrar-horario",
 			contentType: "application/json",
 			data: JSON.stringify({
 				idVet: $("#hddidusuario").val(),
@@ -562,6 +603,34 @@ function registrarHorario() {
 		})
 	} catch (e) {
 		console.log("Hubo un error al insertar los horarios ")
+
+	}
+}
+
+function actualizarHorario(){
+	try {
+		var hManIncio = $("#hManInicio").val();
+		var hManFin = $("#hManFin").val();
+		var hTardIncio = $("#hTarInicio").val();
+		var hTardFin = $("#hTarFin").val();
+
+		/*No le estoy mandando el id del veterinario sino el id del usuario*/
+
+		/*Registrar el horario del usuario*/
+		$.ajax({
+			type: "PUT",
+			url: "/horario/actualizar-horario",
+			contentType: "application/json",
+			data: JSON.stringify({
+				idVet: $("#hddidusuario").val(),
+				manInicio: $("#hManInicio").val(),
+				manFin: $("#hManFin").val(),
+				tarInicio: $("#hTarInicio").val(),
+				tarFin: $("#hTarFin").val()
+			})
+		})
+	} catch (e) {
+		console.log("Hubo un error al actualizar los horarios ")
 
 	}
 }

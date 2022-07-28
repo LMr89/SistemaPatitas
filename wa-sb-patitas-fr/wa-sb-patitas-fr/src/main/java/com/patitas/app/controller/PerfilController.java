@@ -2,15 +2,12 @@ package com.patitas.app.controller;
 
 import com.patitas.app.controller.response.ResultadoResponse;
 import com.patitas.app.model.entity.PerfilUsuario;
-import com.patitas.app.model.entity.Usuario;
 import com.patitas.app.model.request.PerfilRequest;
 import com.patitas.app.util.PerfilHttp;
-import com.patitas.app.util.UsuarioHttp;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/PerfilUsuario")
@@ -31,7 +28,7 @@ public class PerfilController {
             mensaje =  PerfilHttp.actualizarPerfil(prfReq);
 
         } catch (IOException e) {
-            mensaje = "perfil actualizado";
+            mensaje = "perfil no actualizado";
             respuesta= false;
         }
         return new ResultadoResponse(respuesta, mensaje);

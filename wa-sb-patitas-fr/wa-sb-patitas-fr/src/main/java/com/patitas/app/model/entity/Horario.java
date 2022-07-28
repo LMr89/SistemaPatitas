@@ -1,7 +1,5 @@
 package com.patitas.app.model.entity;
 
-import java.time.LocalTime;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

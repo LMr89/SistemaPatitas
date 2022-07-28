@@ -3,12 +3,9 @@ package com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaes
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.Hibernate;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
 @Getter
 @Setter

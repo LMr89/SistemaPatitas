@@ -46,15 +46,15 @@ public class RecepcionistaAdaptador {
 		return registrada;
 	}
 	
-	public Boolean actualizarRecepcionista(Integer id) {
+	public Boolean actualizarRecepcionista(Integer idUsuario) {
 		Boolean actualizado = false;
 		try {
-			Optional<UsuarioJpa> usuarioEncontrado  =  usuarioRep.findById(id);
+			Optional<UsuarioJpa> usuarioEncontrado  =  usuarioRep.findById(idUsuario);
 			RecepcionistaJpa repParaActualizar = null;
 			
 			if (usuarioEncontrado.isPresent()) {
-				repParaActualizar = new RecepcionistaJpa(usuarioEncontrado.get().getId(), 
-						usuarioEncontrado.get(), true);
+				repParaActualizar = recepcionistaRep.findByIdUsuario(usuarioEncontrado.get()).get();
+				repParaActualizar.setEstado(true);
 				recepcionistaRep.save(repParaActualizar);
 				actualizado = true;
 				
@@ -67,15 +67,16 @@ public class RecepcionistaAdaptador {
 		return actualizado;
 	}
 	
-	public Boolean eliminarrRecepcionista(Integer id) {
+	public Boolean desactivarRecepcionista(Integer id) {
 		Boolean eliminada = false;
 		try {
 			Optional<UsuarioJpa> usuarioEncontrado  =  usuarioRep.findById(id);
 			RecepcionistaJpa repParaEliminar = null;
 			
 			if (usuarioEncontrado.isPresent()) {
-				repParaEliminar = new RecepcionistaJpa(usuarioEncontrado.get().getId(), 
-						usuarioEncontrado.get(), false);
+
+				repParaEliminar = recepcionistaRep.findByIdUsuario(usuarioEncontrado.get()).get();
+				repParaEliminar.setEstado(false);
 				recepcionistaRep.save(repParaEliminar);
 				eliminada = true;
 				

@@ -81,22 +81,7 @@ public class UsuarioController {
 		return UsuarioHttp.listarUsuarios();
 	}
 	
-	@PostMapping(path = "/registrar-horario" )
-	@ResponseBody
-	public String registrarHorario(@RequestBody HorarioRequest rq) {
-		
-		log.info("Datos obtenidos del front: " + rq.toString());
-		
-		String resultado = "";
-		try {
-			resultado = HorarioHttp.registrarHorario(rq);
-			
-		} catch (Exception e) {
-			resultado = "Al registrar el horario Usuario Controller FRONT";
-		}
-		
-		return resultado;
-	}
+
 
 
 }

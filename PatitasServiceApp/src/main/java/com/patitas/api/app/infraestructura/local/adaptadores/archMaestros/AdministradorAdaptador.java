@@ -47,15 +47,15 @@ public class AdministradorAdaptador {
 		
 		return registrado;
 	}
-	public Boolean actualizarAdmin(Integer id) {
+	public Boolean actualizarAdmin(Integer idUsuario) {
 		Boolean actualizado = false;
 		try {
-			Optional<UsuarioJpa> usuarioEncontrado  =  usuarioRep.findById(id);
+			Optional<UsuarioJpa> usuarioEncontrado  =  usuarioRep.findById(idUsuario);
 			AdministradorJpa repParaActualizar = null;
 			
 			if (usuarioEncontrado.isPresent()) {
-				repParaActualizar = new AdministradorJpa(usuarioEncontrado.get().getId(), 
-						usuarioEncontrado.get(), true);
+				repParaActualizar = adminiRep.findByIdUsuario(usuarioEncontrado.get()).get();
+				repParaActualizar.setEstado(true);
 				adminiRep.save(repParaActualizar);
 				actualizado = true;
 				
@@ -68,18 +68,22 @@ public class AdministradorAdaptador {
 		return actualizado;
 	}
 	
-	public Boolean eliminarrAdmin(Integer id) {
+	public Boolean desactivarAdmin(Integer id) {
 		Boolean eliminado = false;
 		try {
 			Optional<UsuarioJpa> usuarioEncontrado  =  usuarioRep.findById(id);
+
 			AdministradorJpa repParaEliminar = null;
 			
 			if (usuarioEncontrado.isPresent()) {
-				repParaEliminar = new AdministradorJpa(usuarioEncontrado.get().getId(), usuarioEncontrado.get(), false);
+				repParaEliminar =  adminiRep.findByIdUsuario(usuarioEncontrado.get()).get();
+				/*SE le cambia el estado*/
+				repParaEliminar.setEstado(false);
 				adminiRep.save(repParaEliminar);
 				eliminado = true;
 				
 			}
+			System.out.println("SE DESACTIVO EL ADMINISTRADOR");
 		} catch (Exception e) {
 			System.out.println("Error en la clase Admin Adaptador: -> " + e.getMessage());
 			

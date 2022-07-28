@@ -1,6 +1,7 @@
 package com.patitas.api.app.infraestructura.mapeadores.archMaestros;
 
 import com.patitas.api.app.dominio.entidades.archMaestro.PerfilUsuario;
+import com.patitas.api.app.dominio.modelo.peticion.archMaestros.PerfilUsuarioPeticion;
 import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.PerfilUsuarioJpa;
 import com.patitas.api.app.infraestructura.mapeadores.autenticacion.AccesosMaper;
 
@@ -22,5 +23,15 @@ public class PerfilUsuarioMapper {
 				AccesosMaper.mapDeDominioAEntidadJpa(perfilDom.getIdAcceso()),
 				UsuarioMapper.mapDeDominioAEntidadJpa(perfilDom.getIdUSuario())
 				);
+	}
+
+
+	public static PerfilUsuarioPeticion mapDeDominioAPeticion(PerfilUsuario per){
+		return  new PerfilUsuarioPeticion(
+				per.getId(),
+				per.getNombreUsuario(),
+				per.getContraseniaUsuario(),
+				per.getIdAcceso().getId(),
+				per.getIdUSuario().getId());
 	}
 }

@@ -80,6 +80,7 @@ public class PerfilController {
 			return ResponseEntity.ok("Perfil actualizado");
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 		
 			return ResponseEntity.badRequest().body("Perfil no actualizado" + e.getMessage());
 		}

@@ -1,6 +1,5 @@
 package com.patitas.api.app.infraestructura.local.repositorio.repositorios.archMaestro;
 
-import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -18,18 +17,24 @@ import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaest
 public interface HorarioRep extends JpaRepository<HorarioJpa, Integer> {
 
 	Optional<HorarioJpa> findByIdVet(VeterinarioJpa idVet);
-
-
-	
 	@Transactional
 	@Modifying
 	@Query(value = "{call sp_registrarHorario(:idUsuario, :manInicio, :manFin , :tarInicio, :tarFin)}", nativeQuery = true)
 	void registrarHorario(
-			@Param("idUsuario") Integer  cliente,
+			@Param("idUsuario") Integer  usuario,
 			@Param("manInicio") String manInicio,
 			@Param("manFin") String manFin,
 			@Param("tarInicio") String tarInicio,
 			@Param("tarFin") String tarFin);
 
+	@Transactional
+	@Modifying
+	@Query(value = "{call sp_actualizarHorario(:idUsuario, :manInicio, :manFin , :tarInicio, :tarFin)}", nativeQuery = true)
+	void actualizarHorario(
+			@Param("idUsuario") Integer  usuario,
+			@Param("manInicio") String manInicio,
+			@Param("manFin") String manFin,
+			@Param("tarInicio") String tarInicio,
+			@Param("tarFin") String tarFin);
 
 }

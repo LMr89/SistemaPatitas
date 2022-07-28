@@ -41,4 +41,47 @@ public class HorarioHttp {
 		
 		return respuesta;
 	}
+	public static String obtenerHorarioPorIdUsuario(Integer idUSuario) throws IOException {
+		String resp = "";
+
+		OkHttpClient client = new OkHttpClient().newBuilder()
+				.build();
+		MediaType mediaType = MediaType.parse("text/plain");
+		Request request = new Request.Builder()
+				.url("http://localhost:8070/api/horario/obtener/" + idUSuario)
+
+				.build();
+		Response response = client.newCall(request).execute();
+		if(response.code() == 200) {
+			resp = "existe";
+		}
+		return  resp;
+
+	}
+
+	public static String actualizarHorario(HorarioRequest req) throws ParseException, IOException {
+		String respuesta = "";
+		OkHttpClient client = new OkHttpClient().newBuilder()
+				.build();
+		MediaType mediaType = MediaType.parse("application/json");
+		RequestBody body = RequestBody.create(mediaType, "{\n " +
+				" \"idVeterinario\":" + req.getIdVet() +",\n   " +
+				" \"manInicio\":\""+req.convertirHoraADate(req.getManInicio())+"\",\n  " +
+				"  \"manFin\":\""+req.convertirHoraADate(req.getManFin())+"\",\n   " +
+				" \"tarInicio\":\""+req.convertirHoraADate(req.getTarInicio())+"\",\n   " +
+				" \"tarFin\":\""+req.convertirHoraADate(req.getTarFin())+"\"\n}");
+		Request request = new Request.Builder()
+				.url("http://localhost:8070/api/horario/actualizar")
+				.method("PUT", body)
+				.addHeader("Content-Type", "application/json")
+				.build();
+		Response response = client.newCall(request).execute();
+		if(response.isSuccessful()) {
+			respuesta = response.body().string();
+		}
+
+		return respuesta;
+	}
+
+
 }

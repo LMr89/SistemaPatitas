@@ -10,6 +10,7 @@ public interface IVeterinario {
 	List<VeterinarioRespuesta> listarVeterinario();
 	VeterinarioRespuesta crearNuevoVeterinario(Veterinario vet);
 	Optional<Veterinario> encontrarVeterinarioPorIdCliente(Integer id);
-	Veterinario actualizarVeterinario(Veterinario vet);
-	void eliminarVeterinario(Integer id);
+    Boolean actualizarVeterinario(Integer idUsuario);
+
+    void desactivarVeterinario(Integer id);
 }

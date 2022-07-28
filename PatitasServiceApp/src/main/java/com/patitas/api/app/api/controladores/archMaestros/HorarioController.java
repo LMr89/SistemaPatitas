@@ -60,7 +60,7 @@ public class HorarioController {
 			}
 
 		}catch (Exception c){
-			res  =  new ResponseEntity<>("Horario ya registrado para aquel veterinario",HttpStatus.INTERNAL_SERVER_ERROR);
+			res  =  new ResponseEntity<>("Horario ya registrado para aquel veterinario",HttpStatus.BAD_REQUEST);
 		}
 		return res ;
 		

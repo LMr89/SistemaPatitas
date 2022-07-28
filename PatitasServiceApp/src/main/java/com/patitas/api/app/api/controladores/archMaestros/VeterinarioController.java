@@ -75,7 +75,7 @@ public class VeterinarioController {
 	@ResponseBody
 	public ResponseEntity<String> actualizarVeterinario(@RequestBody Veterinario vet) {
 		try {
-			 objVetAdaptador.actualizarVeterinario(vet);
+			 objVetAdaptador.actualizarVeterinario(vet.getIdUSuario().getId());
 			return ResponseEntity.ok("Veterinario actualizado con exito");
 			
 		} catch (Exception e) {
@@ -87,7 +87,7 @@ public class VeterinarioController {
 	@ResponseBody
 	public  ResponseEntity<String>  eliminarVet(@PathVariable Integer id) {
 		try {
-		 objVetAdaptador.eliminarVeterinario(id);
+		 objVetAdaptador.desactivarVeterinario(id);
 			return ResponseEntity.ok("Veterinario eliminado exitosamente");
 			
 		} catch (Exception e) {

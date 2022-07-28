@@ -45,24 +45,42 @@ public class VeterinarioAdaptador implements IVeterinario{
 
 	@Override
 	public Optional<Veterinario> encontrarVeterinarioPorIdCliente(Integer id) {
+		UsuarioJpa usuarioJpa =usuarioRep.findById(id).get();
 		return Optional.of(VeterinarioMapper.mapDeEntidadJpaADominio(
-				vetRep.findById(id).get()));
+				vetRep.findByIdUsu(usuarioJpa).get()));
 	}
 
 	@Override
-	public Veterinario actualizarVeterinario(Veterinario vet) {
-		VeterinarioJpa veterinarioActualizado = vetRep.save(VeterinarioMapper.mapDeDominioAEntidadJpa(vet));
-		return  VeterinarioMapper.mapDeEntidadJpaADominio(veterinarioActualizado);
-	}
+	public Boolean actualizarVeterinario(Integer idUsuario) {
 
-	@Override
-	public void eliminarVeterinario(Integer id) {
+		Boolean actualizado = false;
 		try {
-			Optional<UsuarioJpa> usuarioEncontrado  =  usuarioRep.findById(id);
+			Optional<UsuarioJpa> usuarioEncontrado  =  usuarioRep.findById(idUsuario);
+			VeterinarioJpa repParaActualizar = null;
+			if (usuarioEncontrado.isPresent()) {
+				repParaActualizar = vetRep.findByIdUsu(usuarioEncontrado.get()).get();
+				repParaActualizar.setEstado(true);
+				vetRep.save(repParaActualizar);
+				actualizado = true;
+
+			}
+		} catch (Exception e) {
+			System.out.println("Error en la clase Recepcionista Adaptador: -> " + e.getMessage());
+
+		}
+
+		return actualizado ;
+	}
+
+	@Override
+	public void desactivarVeterinario(Integer idUsuario) {
+		try {
+			Optional<UsuarioJpa> usuarioEncontrado  =  usuarioRep.findById(idUsuario);
 			VeterinarioJpa repParaEliminar = null;
 			
 			if (usuarioEncontrado.isPresent()) {
-				repParaEliminar = new VeterinarioJpa(usuarioEncontrado.get().getId(), usuarioEncontrado.get(), false);
+				repParaEliminar = vetRep.findByIdUsu(usuarioEncontrado.get()).get();
+				repParaEliminar.setEstado(false);
 				vetRep.save(repParaEliminar);
 				
 				

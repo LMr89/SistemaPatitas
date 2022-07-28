@@ -2,7 +2,6 @@ package com.patitas.api.app.dominio.modelo.respuesta.archMaestros;
 
 import java.util.List;
 
-import com.patitas.api.app.dominio.entidades.archMaestro.Horario;
 import com.patitas.api.app.infraestructura.local.repositorio.entidades.archMaestro.HorarioJpa;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +17,7 @@ public class VeterinarioRespuesta {
 	private Integer id;
 	private String nombre;
 	private String apellidos;
+
 	private List<HorarioJpa> horarios;
 	
 	

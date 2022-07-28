@@ -38,7 +38,7 @@ public class UsuarioController {
 	
 	@PostMapping("/crear")
 	@ResponseBody
-	public ResponseEntity<String> crearNuevoCLiente(@RequestBody Usuario usuario) {
+	public ResponseEntity<String> crearNuevoUsuario(@RequestBody Usuario usuario) {
 		try {
 			 usuarioAdapter.crearNuevoUsuario(usuario);
 			
